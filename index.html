@@ -1,57 +1,83 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>ספרות זולה</title>
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ספרות זולה</title>
 
-.section {
-    display: flex;
-    min-height: 500px;
-}
+  <link rel="stylesheet" href="style.css">
 
-.image {
-    flex: 1;
-    background: url('your-image.jpg') center/cover no-repeat;
-}
+  <!-- Hebrew font -->
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-.content {
-    flex: 1;
-    padding: 60px;
-    background: #f4f4f4;
-}
-
-h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.gold-section {
-    background: #b8942c;
-    color: white;
-    text-align: center;
-    padding: 80px 20px;
-    font-size: 60px;
-}
-</style>
 </head>
 <body>
 
-<div class="section">
-    <div class="image"></div>
-    <div class="content">
-        <h1>אודות המחבר</h1>
-        <p>כאן יבוא טקסט אודות המחבר...</p>
-    </div>
-</div>
+<!-- ================= NAVBAR ================= -->
 
-<div class="gold-section">
-    ביקורת
-</div>
+<header class="navbar">
+
+  <div class="nav-right">
+    <div class="logo">ספרות זולה</div>
+  </div>
+
+  <nav class="nav-center">
+    <a href="#">דף הבית</a>
+    <a href="#">אודות המחבר</a>
+    <a href="#">לקריאת פרק מהספר</a>
+    <a href="#">עדכונים וחדשות</a>
+    <a href="#">צור קשר</a>
+  </nav>
+
+  <div class="nav-left">
+    <img src="visa.png" alt="visa">
+    <img src="mastercard.png" alt="mc">
+    <img src="paypal.png" alt="paypal">
+  </div>
+
+</header>
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <!-- BOOK SIDE -->
+    <div class="book-side">
+      <img src="book.png" class="book-img">
+
+      <button class="buy-btn">לקניה</button>
+      <div class="price-blue">₪87</div>
+    </div>
+
+    <!-- TEXT SIDE -->
+    <div class="text-side">
+
+      <h1 class="headline">
+        רוצה לדעת יותר מנהיגות?
+      </h1>
+
+      <h2 class="subheadline">
+        קראו פרק מהספר וקבלו<br>קופון הנחה
+      </h2>
+
+      <button class="cta-btn">
+        לקריאת הפרק וקבלת קופון הנחה
+      </button>
+
+      <div class="price-area">
+        <span class="old-price">₪87</span>
+        <span class="new-price">₪80</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 </body>
 </html>
