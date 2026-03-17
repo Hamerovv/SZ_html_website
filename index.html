@@ -1,158 +1,235 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>ספרות זולה</title>
+    <title>ספרות זולה</title>
 
-<style>
+    <style>
 
-body{
-margin:0;
-font-family: Arial, Helvetica, sans-serif;
-background:#ffffff;
-color:#333;
-direction:rtl;
-}
+        body{
+        margin:0;
+        font-family:Arial,Helvetica,sans-serif;
+        direction:rtl;
+        background:#ffffff;
+        }
 
-/* HERO SECTION */
+        /* NAVBAR */
 
-.hero{
-background:#5f8791;
-color:white;
-padding:80px 20px;
-text-align:center;
-line-height:1.8;
-font-size:18px;
-}
+        .navbar{
+        background:#4f7680;
+        color:white;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:20px 60px;
+        }
 
-.hero .container{
-max-width:900px;
-margin:auto;
-}
+        .nav-links{
+        display:flex;
+        gap:35px;
+        }
 
-/* GOLD DIVIDER */
+        .nav-links a{
+        color:white;
+        text-decoration:none;
+        font-size:18px;
+        }
 
-.gold-line{
-width:80px;
-height:3px;
-background:#c7a35a;
-margin:60px auto;
-}
+        .logo{
+        font-size:38px;
+        font-weight:300;
+        }
 
-/* SECTION BELOW */
+        /* HERO */
 
-.section{
-max-width:1100px;
-margin:auto;
-padding:40px 20px;
-display:flex;
-align-items:center;
-gap:40px;
-}
+        .hero{
+        background:#caa54c;
+        padding:100px 80px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        }
 
-.section-text{
-flex:1;
-}
+        .hero-text{
+        max-width:500px;
+        }
 
-.section-title{
-font-size:28px;
-margin-bottom:20px;
-color:#3a4a4f;
-}
+        .hero-text h1{
+        font-size:42px;
+        color:#8d1a1a;
+        margin-bottom:10px;
+        }
 
-.section-title span{
-color:#c7a35a;
-margin:0 10px;
-}
+        .hero-text h2{
+        font-size:28px;
+        margin-bottom:20px;
+        }
 
-.section p{
-line-height:1.8;
-font-size:16px;
-}
+        .hero-text button{
+        background:#a52a2a;
+        color:white;
+        border:none;
+        padding:14px 40px;
+        border-radius:25px;
+        font-size:18px;
+        }
 
-.section img{
-flex:1;
-width:100%;
-border-radius:4px;
-}
+        .book img{
+        width:260px;
+        }
 
-@media (max-width:900px){
+        /* SUMMARY SECTION */
 
-.section{
-flex-direction:column;
-text-align:center;
-}
+        .summary{
+        background:#4f7680;
+        color:white;
+        padding:90px 20px;
+        text-align:center;
+        }
 
-}
+        .summary h2{
+        font-size:48px;
+        font-weight:300;
+        }
 
-</style>
+        .gold-line{
+        width:120px;
+        height:4px;
+        background:#d1a64a;
+        margin:25px auto;
+        }
+
+        .summary p{
+        max-width:900px;
+        margin:20px auto;
+        font-size:20px;
+        line-height:1.8;
+        }
+
+        /* SECOND SECTION */
+
+        .section-two{
+        display:flex;
+        align-items:center;
+        }
+
+        .section-two img{
+        width:50%;
+        }
+
+        .section-two .text{
+        width:50%;
+        padding:80px;
+        }
+
+        .section-two h2{
+        font-size:40px;
+        color:#3f5f67;
+        }
+
+        /* FOOTER */
+
+        .footer{
+        background:#4f7680;
+        color:white;
+        text-align:center;
+        padding:30px;
+        }
+
+    </style>
+
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 
-<!-- HERO TEXT -->
+<div class="navbar">
+
+    <div class="logo">ספרות זולה</div>
+
+    <div class="nav-links">
+        <a href="#">דף הבית</a>
+        <a href="#">אודות המחבר</a>
+        <a href="#">לקריאת פרק מהספר</a>
+        <a href="#">עדכונים וחדשות</a>
+        <a href="#">צרו קשר</a>
+    </div>
+
+</div>
+
+<!-- HERO -->
 
 <section class="hero">
 
-<div class="container">
+    <div class="book">
+        <img src="bookcover-ready.png" width="1953" height="2190" alt="כריכת הספר התבייתות">
+    </div>
 
-<p>
-דוד אוזיאל, הוא המפקד לשעבר של היחידה לחילוץ שבויים ונעדרים באחד מסוכני המוסד
-הטובים ביותר. בעבר הוכיח מספר פעמים יכולת מרשימה להציל אנשים במצבים קשים,
-תוך כדי סיכון החיים שלו.
-</p>
+    <div class="hero-text">
 
-<p>
-אלא שדווקא אחרי מבצע שכשל, הוא חי בדירה קטנה בתל אביב ונמנע באופן מוחלט
-מלדבר עם אנשים מעבר לנדרש. אך יום אחד, אישה מסתורית מגיעה אליו ומציעה
-משימה שתכריח אותו לחזור לפעולה.
-</p>
+        <h1>רוצה לצלול לעולם אחר מרתק?</h1>
 
-<p>
-דוד נאלץ לבחור ולהחליט האם שוב ייקח חלק באירוע ראש הממשלה, בשל איום מסתמן,
-על חיי אזרחים ועל מדינת ישראל כולה.
-</p>
+        <h2>קראו פרק מהספר וקבלו קופון הנחה</h2>
 
-<p>
-יום אחד הכל מקבל תפנית חדה – פקודה לחזור ארצה. המתח מגיע לשיאו.
-</p>
+        <button>לקריאת הפרק וקבלת קופון הנחה</button>
 
-</div>
+    </div>
 
 </section>
 
+<!-- SUMMARY -->
 
-<div class="gold-line"></div>
+<section class="summary">
 
+    <h2>התגובות | תקציר בגב הספר</h2>
+
+    <div class="gold-line"></div>
+
+    <p>
+        אוראל, הוא המפקד לשעבר של היחידה לחילוץ שבויים ונעדרים ואחד מסוכני המוסד
+        הטובים ביותר. בעברו מבצעים נועזים וכישורים רבים.
+    </p>
+
+    <p>
+        אך הסדק אחר מבצע שנכשל. הוא חי בודד באירופה בזהות אחרת ונמנע באופן
+        שיטתי מישראל.
+    </p>
+
+    <p>
+        יום אחד דוד מקבל שיחה – פקודה לחזור ארצה.
+    </p>
+
+</section>
 
 <!-- SECOND SECTION -->
 
-<section class="section">
+<section class="section-two">
 
-<img src="book.png" alt="book image">
+    <img src="ship.png" alt="תרגיל שייטת">
 
-<div class="section-text">
+    <div class="text">
 
-<h2 class="section-title">
-מבצע <span>|</span> השתלטות
-</h2>
+        <h2>מבצע | ההשתלטות</h2>
 
-<p>
-הלחימה בדרך הופכת לאנרגיה חדשה אצל דוד. הוא יוצא למסע בעקבות האמת,
-ובמהלך הדרך מגלה שהמשימה שונה לחלוטין ממה שחשב בתחילה.
-</p>
+        <p>
+            תיאור מבצע נועז בלב ים. כוח מיוחד מנסה להשתלט על ספינת משא ענקית
+            בתנאים קשים במיוחד.
+        </p>
 
-<p>
-זהו סיפור על אומץ, נאמנות והחלטות גורליות ברגעים שבהם הכל נראה אבוד.
-</p>
-
-</div>
+    </div>
 
 </section>
 
+<!-- FOOTER -->
+
+<div class="footer">
+
+    <p>© ספרות זולה</p>
+
+</div>
 
 </body>
 </html>
