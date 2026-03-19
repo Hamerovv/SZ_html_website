@@ -1,3 +1,5 @@
+/* ================= GLOBAL ================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -26,6 +28,12 @@ body {
   font-weight: 800;
 }
 
+.logo img {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
 .nav-center {
   display: flex;
   gap: 35px;
@@ -47,7 +55,7 @@ body {
   margin-left: 10px;
 }
 
-/* ================= HERO ================= */
+/* ================= HERO (HOMEPAGE) ================= */
 
 .hero {
   position: relative;
@@ -71,21 +79,23 @@ body {
 .hero-content {
   position: relative;
   display: flex;
-  width: 85%;
+  width: 90%;
   max-width: 1400px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 40px;
 }
 
 /* BOOK SIDE */
 
 .book-side {
   text-align: center;
+  flex-shrink: 0;
 }
 
 .book-img {
-  width: 280px;
-  margin-bottom: 25px;
+  width: 520px;
+  margin-bottom: 0;
 }
 
 .buy-btn {
@@ -107,8 +117,8 @@ body {
 /* TEXT SIDE */
 
 .text-side {
-  text-align: center;
-  max-width: 600px;
+  text-align: right;
+  max-width: 550px;
 }
 
 .headline {
@@ -165,5 +175,107 @@ body {
   .hero {
     height: auto;
     padding: 60px 0;
+  }
+}
+
+/* ================= PEREK (CHAPTER PAGE ONLY) ================= */
+
+/* Page background */
+
+.chapter-page {
+  background: #f8f6f2;
+}
+
+/* Container */
+
+.chapter-page .chapter-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+/* Titles */
+
+.chapter-page .chapter-title {
+  font-size: 38px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.chapter-page .chapter-subtitle {
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+  margin-bottom: 30px;
+}
+
+/* Gold divider */
+
+.chapter-page .divider {
+  width: 80px;
+  height: 4px;
+  background: #d7b84a;
+  margin: 20px auto 50px;
+  border-radius: 2px;
+}
+
+/* Text block */
+
+.chapter-page .book-text {
+  direction: rtl;
+  text-align: justify;
+  line-height: 1.9;
+  font-size: 18px;
+  color: #222;
+}
+
+/* Paragraph spacing */
+
+.chapter-page .book-text p {
+  margin-bottom: 1.4em;
+}
+
+/* Dialog line spacing */
+
+.chapter-page .book-text p br {
+  line-height: 2;
+}
+
+/* Drop cap (first letter) */
+
+.chapter-page .book-text p:first-child::first-letter {
+  font-size: 48px;
+  font-weight: 800;
+  float: right;
+  margin-left: 10px;
+  line-height: 1;
+}
+
+/* Footer */
+
+.chapter-page .footer {
+  text-align: center;
+  margin: 80px 0 40px;
+}
+
+.chapter-page .back-btn {
+  background: #2f5f66;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Chapter responsive */
+
+@media (max-width: 768px) {
+  .chapter-page .chapter-title {
+    font-size: 28px;
+  }
+
+  .chapter-page .book-text {
+    font-size: 16px;
+    line-height: 1.8;
   }
 }

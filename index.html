@@ -3,178 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>ספרות זולה</title>
-
+    <link rel="stylesheet" href="style.css">
     <style>
+        /* ================= SUMMARY SECTION ================= */
 
-        body{
-        margin:0;
-        font-family:Arial,Helvetica,sans-serif;
-        direction:rtl;
-        background:#ffffff;
+        .summary {
+            background: #4f7680;
+            color: white;
+            padding: 90px 20px;
+            text-align: center;
         }
 
-        /* NAVBAR */
-
-        .navbar{
-        background:#4f7680;
-        color:white;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:20px 60px;
+        .summary h2 {
+            font-size: 48px;
+            font-weight: 300;
         }
 
-        .nav-links{
-        display:flex;
-        gap:35px;
+        .gold-line {
+            width: 120px;
+            height: 4px;
+            background: #d1a64a;
+            margin: 25px auto;
         }
 
-        .nav-links a{
-        color:white;
-        text-decoration:none;
-        font-size:18px;
+        .summary p {
+            max-width: 900px;
+            margin: 20px auto;
+            font-size: 20px;
+            line-height: 1.8;
         }
 
-        .logo{
-        font-size:38px;
-        font-weight:300;
+        /* ================= SECOND SECTION ================= */
+
+        .section-two {
+            display: flex;
+            align-items: center;
         }
 
-        /* HERO */
-
-        .hero{
-        background:#caa54c;
-        padding:100px 80px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
+        .section-two img {
+            width: 50%;
+            display: block;
         }
 
-        .hero-text{
-        max-width:500px;
+        .section-two .text {
+            width: 50%;
+            padding: 80px;
         }
 
-        .hero-text h1{
-        font-size:42px;
-        color:#8d1a1a;
-        margin-bottom:10px;
+        .section-two h2 {
+            font-size: 40px;
+            color: #3f5f67;
+            margin-bottom: 20px;
         }
 
-        .hero-text h2{
-        font-size:28px;
-        margin-bottom:20px;
+        .section-two .text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
         }
 
-        .hero-text button{
-        background:#a52a2a;
-        color:white;
-        border:none;
-        padding:14px 40px;
-        border-radius:25px;
-        font-size:18px;
+        /* ================= FOOTER ================= */
+
+        .footer {
+            background: #4f7680;
+            color: white;
+            text-align: center;
+            padding: 30px;
         }
-
-        .book img{
-        width:260px;
-        }
-
-        /* SUMMARY SECTION */
-
-        .summary{
-        background:#4f7680;
-        color:white;
-        padding:90px 20px;
-        text-align:center;
-        }
-
-        .summary h2{
-        font-size:48px;
-        font-weight:300;
-        }
-
-        .gold-line{
-        width:120px;
-        height:4px;
-        background:#d1a64a;
-        margin:25px auto;
-        }
-
-        .summary p{
-        max-width:900px;
-        margin:20px auto;
-        font-size:20px;
-        line-height:1.8;
-        }
-
-        /* SECOND SECTION */
-
-        .section-two{
-        display:flex;
-        align-items:center;
-        }
-
-        .section-two img{
-        width:50%;
-        }
-
-        .section-two .text{
-        width:50%;
-        padding:80px;
-        }
-
-        .section-two h2{
-        font-size:40px;
-        color:#3f5f67;
-        }
-
-        /* FOOTER */
-
-        .footer{
-        background:#4f7680;
-        color:white;
-        text-align:center;
-        padding:30px;
-        }
-
     </style>
-
 </head>
 
 <body>
 
 <!-- NAVBAR -->
 
-<div class="navbar">
+<nav class="navbar">
 
-    <div class="logo">ספרות זולה</div>
+    <div class="logo"><img src="logo.png" alt="ספרות זולה"></div>
 
-    <div class="nav-links">
-        <a href="#">דף הבית</a>
+    <div class="nav-center">
+        <a href="index.html">דף הבית</a>
         <a href="#">אודות המחבר</a>
-        <a href="#">לקריאת פרק מהספר</a>
+        <a href="perek.html">לקריאת פרק מהספר</a>
         <a href="#">עדכונים וחדשות</a>
         <a href="#">צרו קשר</a>
     </div>
 
-</div>
+    <div class="nav-left">
+        <!-- payment icons placeholder -->
+        <span style="color:white; font-size:14px;">🔒 Visa • PayPal</span>
+    </div>
+
+</nav>
 
 <!-- HERO -->
 
 <section class="hero">
 
-    <div class="book">
-        <img src="bookcover-ready.png" width="100" height="300" alt="כריכת הספר התבייתות">
-    </div>
+    <div class="hero-overlay"></div>
 
-    <div class="hero-text">
+    <div class="hero-content">
 
-        <h1>רוצה לצלול לעולם אחר מרתק?</h1>
+        <div class="text-side">
+            <h1 class="headline">רוצה לצלול לעולם אחר מרתק?</h1>
+            <h2 class="subheadline">קראו פרק מהספר וקבלו קופון הנחה</h2>
+            <button class="cta-btn" onclick="location.href='perek.html'">לקריאת הפרק וקבלת קופון הנחה</button>
+        </div>
 
-        <h2>קראו פרק מהספר וקבלו קופון הנחה</h2>
-
-        <button>לקריאת הפרק וקבלת קופון הנחה</button>
+        <div class="book-side">
+            <img class="book-img" src="bookcover-ready.png" alt="כריכת הספר התבייתות">
+        </div>
 
     </div>
 
@@ -190,20 +129,19 @@
 
     <p>
         דוד אור־אל, הוא המפקד לשעבר של היחידה לחילוץ שבויים ונעדרים ואחד מסוכני המוסד הטובים ביותר. בעברו מבצעים נועזים חשאיים רבים. התרומה שלו לביטחון המדינה גדולה יותר מכפי שניתן לחשוף.
-
-
-
-        אלא שדוד הסתלק אחרי מבצע שכשל. הוא חי בודד באירופה בזהות אחרת ונמנע באופן מוחלט מישראל. זוהי מדינה שהושחתה בעיניו, ולכן הוא מעדיף להיחשב למשתמט מאשר להמשיך להשתייך לארגוני הביטחון שפועלים בניגוד לאמונתו ולערכיו.
-
-
-
-        דוד נאלץ לברוח ולהחליף זהויות, שכן על-פי הוראת ראש הממשלה, בשל היותו משתמט, על ארגוני הביטחון הישראליים לראות בו מטרה ולחסל אותו.
-
-
-
-        יום אחד דוד מקבל שיחה - פקודה לחזור ארצה. אחיו בנימין נפל בשבי.
     </p>
 
+    <p>
+        אלא שדוד הסתלק אחרי מבצע שכשל. הוא חי בודד באירופה בזהות אחרת ונמנע באופן מוחלט מישראל. זוהי מדינה שהושחתה בעיניו, ולכן הוא מעדיף להיחשב למשתמט מאשר להמשיך להשתייך לארגוני הביטחון שפועלים בניגוד לאמונתו ולערכיו.
+    </p>
+
+    <p>
+        דוד נאלץ לברוח ולהחליף זהויות, שכן על-פי הוראת ראש הממשלה, בשל היותו משתמט, על ארגוני הביטחון הישראליים לראות בו מטרה ולחסל אותו.
+    </p>
+
+    <p>
+        יום אחד דוד מקבל שיחה - פקודה לחזור ארצה. אחיו בנימין נפל בשבי.
+    </p>
 
 </section>
 
@@ -219,15 +157,14 @@
 
         <p>
             הלוחמים בצד האונייה השליכו צלצל, והוא נתפס במעקה הסיפון. סולם חבלים השתלשל ממנו. הם החלו לטפס. הראשון שבהם נשא על גבו כלב שנח בתוך מנשא מיוחד. לאחר כמה דקות הם עמדו צפופים בראש הסולם, מוכנים לפקודה שתזניק אותם מעבר למעקה הסיפון של האונייה.
+        </p>
+
+        <p>
             הרמקולים השמיעו פיצוץ, אבל כל המסכים המשיכו להציג את הצד האחר. היה ברור לכולם שבצד השני נפער חור בדופן האונייה ושעון העצר מופעל. הפקודה לפעול נשמעה. הכלב זינק מעל הלוחם אל הסיפון והחל בסריקה. הלוחמים האחרים מיהרו בעקבותיו.
+        </p>
 
-
-
-            אברהם, כמו יתר הנוכחים בחדר, ראה אותם מפלסים להם דרך, תוך חיפויים הדדיים, בין המכולות שנחו על הסיפון. הם הבחינו בדרך בכל דמות שביימה אויב כשהופיעה וחיסלו אותה בקלות. כשהגיעו אל המכולה חבר אליהם הצוות שעלה מהצד השני.
-
-
-
-            הם אבטחו אותם בזמן שהצוות השני רתם אל המכולה שקי הצפה והחל למלא אותם באוויר.
+        <p>
+            אברהם, כמו יתר הנוכחים בחדר, ראה אותם מפלסים להם דרך, תוך חיפויים הדדיים, בין המכולות שנחו על הסיפון. הם אבטחו אותם בזמן שהצוות השני רתם אל המכולה שקי הצפה והחל למלא אותם באוויר.
         </p>
 
     </div>
@@ -236,11 +173,9 @@
 
 <!-- FOOTER -->
 
-<div class="footer">
-
+<footer class="footer">
     <p>© ספרות זולה</p>
-
-</div>
+</footer>
 
 </body>
 </html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פרק מהספר</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== BOOK PAGE DESIGN ===== */
+
+        .chapter-page {
+            background: #3a7ab8;
+            min-height: 100vh;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        /* Blue band top (already from navbar) */
+
+        .book-scene {
+            position: relative;
+            padding: 0 0 80px 0;
+            background: #3a7ab8;
+        }
+
+        /* The open book wrapper — full width, overflow hidden to clip left page */
+
+        .book-spread {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            min-height: 680px;
+            overflow: hidden;
+        }
+
+        /* Left page (blank / verso) — only a narrow sliver visible, clipped at left edge */
+
+        .book-page-left {
+            /* Fixed narrow width — mostly off-screen to the left */
+            width: 120px;
+            flex-shrink: 0;
+            background: linear-gradient(to left,
+                #dedad2 0%,
+                #eae6de 40%,
+                #f2efe8 100%
+            );
+            position: relative;
+            box-shadow:
+                inset -8px 0 20px rgba(0,0,0,0.10);
+        }
+
+        /* Spine shadow between pages */
+
+        .book-spine {
+            width: 22px;
+            flex-shrink: 0;
+            position: relative;
+            background: linear-gradient(to right,
+                #b0a898 0%,
+                #d8d2c8 25%,
+                #eceae4 50%,
+                #d4cfc5 75%,
+                #a8a098 100%
+            );
+            box-shadow:
+                0 0 18px rgba(0,0,0,0.28),
+                inset 0 0 8px rgba(0,0,0,0.08);
+            z-index: 2;
+        }
+
+        /* Right page (recto) — takes all remaining space */
+
+        .book-page-right {
+            flex: 1;
+            background: linear-gradient(to right,
+                #edeae2 0%,
+                #f5f2eb 8%,
+                #faf8f4 40%,
+                #fdfcf9 100%
+            );
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                4px 8px 35px rgba(0,0,0,0.20);
+        }
+
+        /* Subtle page texture overlay */
+
+        .book-page-right::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        /* Page number lines (decorative ruled effect) */
+
+        .book-page-right::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 30px,
+                rgba(180,170,150,0.07) 30px,
+                rgba(180,170,150,0.07) 31px
+            );
+            pointer-events: none;
+        }
+
+        /* The full-width blue header band that sits above both pages */
+
+        .book-top-band {
+            background: #3a7ab8;
+            height: 50px;
+            width: 100%;
+            border-bottom: 3px solid #2d6096;
+        }
+
+        /* The blue bottom band */
+
+        .book-bottom-band {
+            background: #3a7ab8;
+            height: 40px;
+            width: 100%;
+            border-top: 3px solid #2d6096;
+        }
+
+        /* Page edges (thin lines simulating stacked pages) */
+
+        .book-page-left::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 8px;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to bottom, #d0ccc4, #b8b4ac);
+            border-radius: 0 0 0 4px;
+        }
+
+        .book-page-right::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            right: 8px;
+            height: 6px;
+            background: linear-gradient(to bottom, #d0ccc4, #b8b4ac);
+            border-radius: 0 0 4px 0;
+        }
+
+        /* ===== CONTENT INSIDE RIGHT PAGE ===== */
+
+        .page-content {
+            position: relative;
+            z-index: 1;
+            padding: 55px 80px 55px 70px;
+            min-height: 680px;
+        }
+
+        .chapter-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #2a2018;
+            text-align: center;
+            margin-bottom: 6px;
+            letter-spacing: 0.03em;
+        }
+
+        .chapter-subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: #9a9080;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 300;
+            margin-bottom: 18px;
+            letter-spacing: 0.05em;
+        }
+
+        .page-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, #d7b84a, #c9a83a);
+            margin: 0 auto 30px;
+            border-radius: 2px;
+        }
+
+        /* Book text */
+
+        .book-text {
+            direction: rtl;
+            text-align: justify;
+            line-height: 2;
+            font-size: 15px;
+            color: #2a2018;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-weight: 400;
+        }
+
+        .book-text p {
+            margin-bottom: 1.2em;
+        }
+
+        /* Drop cap on first paragraph */
+
+        .book-text p:first-child::first-letter {
+            font-size: 52px;
+            font-weight: 900;
+            float: right;
+            margin-left: 8px;
+            line-height: 0.85;
+            color: #3a7ab8;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        /* Page number */
+
+        .page-number {
+            text-align: center;
+            font-size: 12px;
+            color: #b0a898;
+            font-family: 'Heebo', sans-serif;
+            margin-top: 20px;
+            letter-spacing: 0.1em;
+        }
+
+        /* LEFT PAGE — just a decorative sliver */
+
+        .left-page-content {
+            padding: 60px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            opacity: 0.25;
+        }
+
+        .left-page-lines .fake-line {
+            height: 2px;
+            background: rgba(100,90,70,0.5);
+            border-radius: 1px;
+            width: 90%;
+            margin-bottom: 20px;
+        }
+
+        .left-page-lines .fake-line:nth-child(even) { width: 60%; }
+        .left-page-lines .fake-line:nth-child(3n)   { width: 75%; }
+
+        /* ===== OUTER WRAPPER: blue background like the image ===== */
+
+        .book-outer {
+            background: #3a7ab8;
+            padding: 0;
+        }
+
+        /* shadow beneath book */
+
+        .book-shadow {
+            max-width: 920px;
+            margin: 0 auto;
+            height: 18px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.35) 0%, transparent 70%);
+            position: relative;
+            top: -4px;
+        }
+
+        /* ===== BACK BUTTON ===== */
+
+        .chapter-footer {
+            text-align: center;
+            padding: 40px 0 60px;
+            background: #3a7ab8;
+        }
+
+        .back-btn {
+            background: white;
+            color: #3a7ab8;
+            padding: 12px 35px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 15px;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #f0f8ff;
+            transform: translateY(-2px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media (max-width: 768px) {
+            .book-page-left, .book-spine {
+                display: none;
+            }
+            .book-page-right {
+                width: 100%;
+                border-radius: 0;
+            }
+            .book-spread {
+                max-width: 100%;
+            }
+            .page-content {
+                padding: 40px 25px;
+            }
+            .book-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body class="chapter-page">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo"><img src="logo.png" alt="ספרות זולה"></div>
+    <div class="nav-center">
+        <a href="index.html">דף הבית</a>
+        <a href="#">אודות המחבר</a>
+        <a href="perek.html" style="color:#d7b84a;">לקריאת פרק מהספר</a>
+        <a href="#">עדכונים וחדשות</a>
+        <a href="#">צרו קשר</a>
+    </div>
+    <div class="nav-left">
+        <span style="color:white; font-size:14px;">🔒 Visa • PayPal</span>
+    </div>
+</nav>
+
+<!-- BOOK SCENE -->
+<div class="book-outer">
+
+    <!-- Blue top band -->
+    <div class="book-top-band"></div>
+
+    <!-- Open book spread -->
+    <div class="book-spread">
+
+        <!-- Left (blank) page -->
+        <div class="book-page-left">
+            <div class="left-page-content">
+                <div class="left-page-lines">
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                    <div class="fake-line"></div><div class="fake-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spine -->
+        <div class="book-spine"></div>
+
+        <!-- Right page with text -->
+        <div class="book-page-right">
+            <div class="page-content">
+
+                <h1 class="chapter-title">פרק מהספר</h1>
+                <div class="chapter-subtitle">עמודים 23–34</div>
+                <div class="page-divider"></div>
+
+                <div class="book-text" dir="rtl">
+
+                    <p>
+                        השומר בשער הצדיע לו, אברהם סימן לו שיוריד את ידו ונכנס.
+                    </p>
+
+                    <p>
+                        הוא יצא מהמעלית ונכנס אל חדר השליטה. חיילים רכנו על מסכי מחשב. קצינים שוטטו ביניהם. אברהם זיהה את אלוף הפיקוד בכומתה החומה ודאג להתמקם הרחק ממנו. הוא התיישב בין חיילים זוטרים וצפה במסך המרכזי. כל אחד מהם הפעיל מערכת אחרת או שוחח בטלפון האוזנייה שהיה מונח על ראשו. אברהם לא האזין, אך היה לו ברור שהם שולחים ושולחות הנחיות למפעילי המזל״טים כדי לקבל את התמונות האופטימליות מהם.
+                    </p>
+
+                    <p>
+                        המסך הקרין אוניית מכולות גדולה למדי. שתי גוררות דחפו אותה מאחור. מלפנים צפו בדממה שש סירות גומי קטנות. שלוש מהן גלשו לצד אחד והשלוש האחרות לצד השני. חבל הלך ונמתח בין שתי הקבוצות וצף על פני המים. האונייה התקרבה אליהן, והמסך הקרין את הצילום מלפנים. חרטום האונייה התקדם במים ונשק לחבל. היא המשיכה להתקדם, והחבל המחובר לסירות נמתח משני צידיה. בכל דקה שחלפה הלכו הסירות ונצמדו אל האונייה.
+                    </p>
+
+                    <p>
+                        ״איזה אלופים,״ מלמל הקצין הבכיר ונעמד לצד אברהם.<br>
+                        אברהם התבונן בו בתמיהה.<br>
+                        ״החבל,״ הצביע האלוף אל המסך הגדול, ״גם מצמיד אותם לאונייה וגם שומר על אותה מהירות.״<br>
+                        ״נו, באמת,״ אברהם היה קצר רוח, ״כל פיראט סומלי לומד את זה בגן חובה.״<br>
+                        ״ככה הפיראטים עובדים? באמת?״<br>
+                        אברהם לא טרח לענות.
+                    </p>
+
+                    <p>
+                        הלוחמים בצד האונייה השליכו צלצל, והוא נתפס במעקה הסיפון. סולם חבלים השתלשל ממנו. הם החלו לטפס. הראשון שבהם נשא על גבו כלב שנח בתוך מנשא מיוחד. לאחר כמה דקות הם עמדו צפופים בראש הסולם, מוכנים לפקודה שתזניק אותם מעבר למעקה הסיפון של האונייה. הרמקולים השמיעו פיצוץ, אבל כל המסכים המשיכו להציג את הצד האחר. היה ברור לכולם שבצד השני נפער חור בדופן האונייה ושעון העצר מופעל. הפקודה לפעול נשמעה. הכלב זינק מעל הלוחם אל הסיפון והחל בסריקה. הלוחמים האחרים מיהרו בעקבותיו.
+                    </p>
+
+                    <p>
+                        אברהם, כמו יתר הנוכחים בחדר, ראה אותם מפלסים להם דרך, תוך חיפויים הדדיים, בין המכולות שנחו על הסיפון. הם הבחינו בדרך בכל דמות שביימה אויב כשהופיעה וחיסלו אותה בקלות. כשהגיעו אל המכולה חבר אליהם הצוות שעלה מהצד השני. הם אבטחו אותם בזמן שהצוות השני רתם אל המכולה שקי הצפה והחל למלא אותם באוויר.
+                    </p>
+
+                    <p>
+                        זו הייתה עבודה ארוכה ומשעממת. המתנה מתישה. אברהם קם והסתובב בחדר. לקח למדחסי האוויר עשרים דקות עד שהצליחו למלא את שקי ההצפה כדי שלושה רבעים מנפחם, פרק זמן שבו השלימה האונייה את נטייתה וכמעט התהפכה. מפקד היחידה לא לקח סיכון נוסף והורה לכולם, פרט לשבעה שעסקו בהצפה, לחזור לסירות ולהתרחק. כשהמצב נהיה מסוכן, הוא הורה גם לשבעה לסגת – למרות שלא סיימו – ולהשאיר את המפוחים עובדים מאחור. הם הגיעו ברגע האחרון, לפני שהאונייה התהפכה, דילגו אל הסירות שהיו עמוסות והתרחקו.
+                    </p>
+
+                    <p>
+                        הנוכחים בחדר היו במתח כאשר האונייה השלימה היפוך ושקעה אל מול חופי עתלית. המכולות החליקו ממנה ונפלו אל המים. הן שקעו ולא נותר מהן זכר. כאשר חזרה וצפה לה המכולה הקשורה לשקי ההצפה נמלא החדר קריאות של שמחת ניצחון. האלוף, שאברהם הצליח לחמוק ממנו עד כה, נצמד אליו מאושר.
+                    </p>
+
+                    <p>
+                        ״מקצוענים,״ אמר האלוף בהערצה.<br>
+                        ״כן,״ ענה אברהם, ״רק שבמציאות יירו עליהם באמת. האונייה תהיה מברזל, והמכולות יהיו סדורות זו מעל זו.״<br>
+                        האלוף התבונן בו ושתק.<br>
+                        ״ולא צריך את כל זה. מספיק שלא ימצאו את המכולה הנכונה בזמן והם בברוך.״<br>
+                        ״מה עדיף?״ התבונן בו האלוף, ״להרוס חיים של עשרים מיליון דייגים?״<br>
+                        ״אויש,״ אברהם לא הסתיר את הזלזול, ״אתה מטומטם. אבל אל תיקח את זה אישית. אתה לא היחיד במטה הנבחר.״<br>
+                        ״ממך לא ציפיתי,״ השיב האלוף, ״דווקא חשבתי שאתה איש ערכים.״<br>
+                        ״ערכים? מה הקשר?״<br>
+                        ״טוהר הנשק, זה מה הקשר. עשרים מיליון דייגים.״<br>
+                        ״ונשמרתם מאוד לנפשותיכם,״ אמר אברהם.<br>
+                        ״בדיוק.״<br>
+                        ״אז תקשיב, מר רב־אלוף לעתיד. דו־תחמוצת האורניום היא חומר יציב. שום סכנה לפליטה של חומר רדיואקטיבי.״<br>
+                        ״ארבעים אחוז העשרה?״<br>
+                        ״אין דבר כזה. וגם אם היה, אין שום סכנה. יכולנו לפוצץ את זה, וזה היה מתפזר כמו חול.״<br>
+                        ״ופולט.״<br>
+                        ״לא פולט. גם לא בעוד מיליון שנה,״ הוא לא התאפק מלהמשיך, ״חבורת מטומטמים. מנופפים לכם בדגל אורניום, ואתם כמו כלבים. נושכים בכרית.״<br>
+                        ״אז למה אנחנו עושים את זה?״ קרא אחריו האלוף כשאברהם פנה לעזוב.<br>
+                        ״שאלה מעולה,״ השיב אברהם לפני שיצא, ״אם לא תשאל איך תגדל ותהיה רמטכ״ל?״
+                    </p>
+
+                </div>
+
+                <div class="page-number">עמודים 23–34</div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Blue bottom band -->
+    <div class="book-bottom-band"></div>
+
+    <!-- Shadow beneath book -->
+    <div class="book-shadow"></div>
+
+    <!-- Footer with back button -->
+    <div class="chapter-footer">
+        <a href="index.html" class="back-btn">← חזרה לדף הבית</a>
+    </div>
+
+</div>
+
+</body>
+</html>
