@@ -88,31 +88,7 @@
 
         /* Subtle page texture overlay */
 
-        .book-page-right::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            opacity: 0.4;
-        }
-
-        /* Page number lines (decorative ruled effect) */
-
-        .book-page-right::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: repeating-linear-gradient(
-                to bottom,
-                transparent,
-                transparent 30px,
-                rgba(180,170,150,0.07) 30px,
-                rgba(180,170,150,0.07) 31px
-            );
-            pointer-events: none;
-        }
+        /* Paper texture only — ruled lines removed */
 
         /* The full-width blue header band that sits above both pages */
 
@@ -235,23 +211,8 @@
         /* LEFT PAGE — just a decorative sliver */
 
         .left-page-content {
-            padding: 60px 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            opacity: 0.25;
+            opacity: 0;
         }
-
-        .left-page-lines .fake-line {
-            height: 2px;
-            background: rgba(100,90,70,0.5);
-            border-radius: 1px;
-            width: 90%;
-            margin-bottom: 20px;
-        }
-
-        .left-page-lines .fake-line:nth-child(even) { width: 60%; }
-        .left-page-lines .fake-line:nth-child(3n)   { width: 75%; }
 
         /* ===== OUTER WRAPPER: blue background like the image ===== */
 
@@ -325,16 +286,17 @@
 
 <!-- NAVBAR -->
 <nav class="navbar">
-    <div class="logo"><img src="logo.png" alt="ספרות זולה"></div>
+    <a href="index.html"><div class="logo"><img src="logo.png" alt="ספרות זולה"></div></a>
     <div class="nav-center">
         <a href="index.html">דף הבית</a>
-        <a href="#">אודות המחבר</a>
+        <a href="about.html">אודות דוד אוראל</a>
         <a href="perek.html" style="color:#d7b84a;">לקריאת פרק מהספר</a>
-        <a href="#">עדכונים וחדשות</a>
-        <a href="#">צרו קשר</a>
+        <a href="news.html">עדכונים וחדשות</a>
+        <a href="contact.html">צרו קשר</a>
     </div>
     <div class="nav-left">
-        <span style="color:white; font-size:14px;">🔒 Visa • Mastercard</span>
+        <span class="cart-link" onclick="toggleCart()">🛒 סל (<span id="cart-count">0</span>)</span>
+        <span style="color:white; font-size:14px; margin-right:15px;">🔒 Visa • Mastercard</span>
     </div>
 </nav>
 
@@ -350,18 +312,7 @@
         <!-- Left (blank) page -->
         <div class="book-page-left">
             <div class="left-page-content">
-                <div class="left-page-lines">
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                    <div class="fake-line"></div><div class="fake-line"></div>
-                </div>
+                
             </div>
         </div>
 
@@ -458,5 +409,37 @@
 
 </div>
 
+<!-- CHECKOUT POPUP -->
+<div id="checkout-popup" class="checkout-popup">
+    <div class="checkout-popup-inner">
+        <button class="close-popup-btn" onclick="hideCheckoutPopup()">×</button>
+        <div class="checkout-popup-icon">✅</div>
+        <h2>הספר נוסף לסל!</h2>
+        <p>הוספת את "התבייתות" לסל הקניות שלך.<br>לתשלום מאובטח — הזמינו עכשיו.</p>
+        <div class="checkout-popup-total">₪79</div>
+        <div class="checkout-popup-btns">
+            <button class="checkout-btn" onclick="hideCheckoutPopup()">לתשלום</button>
+            <button class="continue-btn" onclick="hideCheckoutPopup()">המשך קניות</button>
+        </div>
+    </div>
+</div>
+
+<!-- CART DRAWER -->
+<div id="cart-drawer" class="cart-drawer">
+    <div class="cart-header">
+        <h3>סל הקניות שלי</h3>
+        <button onclick="toggleCart()" class="close-btn">×</button>
+    </div>
+    <div id="cart-items" class="cart-items-list"></div>
+    <div class="cart-footer">
+        <div class="cart-subtotal-row">ספרים: <span id="cart-total">₪0</span></div>
+        <div id="cart-delivery" class="cart-delivery-row"></div>
+        <div id="cart-grand-total" class="total-row" style="display:none;"></div>
+        <button id="checkout-btn" class="checkout-btn" disabled>לתשלום מאובטח</button>
+    </div>
+</div>
+<div id="overlay" onclick="toggleCart()"></div>
+
 </body>
+<script src="script.js"></script>
 </html>
