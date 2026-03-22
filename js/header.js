@@ -4,7 +4,7 @@ document.write(`
 
         <div class="logo">
             <a href="index.html">
-                <img src="logo.png" alt="ספרות זולה">
+                <img src="images/logo.png" alt="ספרות זולה"/>
             </a>
         </div>
 
