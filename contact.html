@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>צרו קשר | התבייתות</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== BOOK PAGE DESIGN ===== */
+
+        .chapter-page {
+            background: #3a7ab8;
+            min-height: 100vh;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        .book-scene {
+            position: relative;
+            padding: 0 0 80px 0;
+            background: #3a7ab8;
+        }
+
+        .book-spread {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            min-height: 700px;
+            overflow: hidden;
+        }
+
+        .book-page-left {
+            width: 120px;
+            flex-shrink: 0;
+            background: linear-gradient(to left,
+                #dedad2 0%,
+                #eae6de 40%,
+                #f2efe8 100%
+            );
+            position: relative;
+            box-shadow:
+                inset -8px 0 20px rgba(0,0,0,0.10);
+        }
+
+        .book-spine {
+            width: 22px;
+            flex-shrink: 0;
+            position: relative;
+            background: linear-gradient(to right,
+                #b0a898 0%,
+                #d8d2c8 25%,
+                #eceae4 50%,
+                #d4cfc5 75%,
+                #a8a098 100%
+            );
+            box-shadow:
+                0 0 18px rgba(0,0,0,0.28),
+                inset 0 0 8px rgba(0,0,0,0.08);
+            z-index: 2;
+        }
+
+        .book-page-right {
+            flex: 1;
+            background: linear-gradient(to right,
+                #edeae2 0%,
+                #f5f2eb 8%,
+                #faf8f4 40%,
+                #fdfcf9 100%
+            );
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                4px 8px 35px rgba(0,0,0,0.20);
+        }
+
+        /* Paper texture only — ruled lines removed */
+
+        /* The full-width blue header band */
+
+        .book-top-band {
+            background: #3a7ab8;
+            height: 50px;
+            width: 100%;
+            border-bottom: 3px solid #2d6096;
+        }
+
+        .book-bottom-band {
+            background: #3a7ab8;
+            height: 40px;
+            width: 100%;
+            border-top: 3px solid #2d6096;
+        }
+
+        /* Page edges */
+
+        .book-page-left::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 8px;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to bottom, #d0ccc4, #b8b4ac);
+            border-radius: 0 0 0 4px;
+        }
+
+        .book-page-right::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            right: 8px;
+            height: 6px;
+            background: linear-gradient(to bottom, #d0ccc4, #b8b4ac);
+            border-radius: 0 0 4px 0;
+        }
+
+        /* ===== CONTENT INSIDE RIGHT PAGE ===== */
+
+        .page-content {
+            position: relative;
+            z-index: 1;
+            padding: 55px 80px 55px 70px;
+            min-height: 700px;
+        }
+
+        .chapter-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #2a2018;
+            text-align: center;
+            margin-bottom: 6px;
+            letter-spacing: 0.03em;
+        }
+
+        .chapter-subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: #9a9080;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 300;
+            margin-bottom: 18px;
+            letter-spacing: 0.05em;
+        }
+
+        .page-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, #d7b84a, #c9a83a);
+            margin: 0 auto 30px;
+            border-radius: 2px;
+        }
+
+        /* ===== CONTACT FORM ===== */
+
+        .contact-form {
+            direction: rtl;
+            text-align: right;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 16px;
+            color: #2a2018;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #d8d2c8;
+            border-radius: 10px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 15px;
+            color: #2a2018;
+            background: #fdfcf9;
+            transition: 0.2s;
+            box-sizing: border-box;
+            direction: rtl;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3a7ab8;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(58,122,184,0.15);
+        }
+
+        .form-group textarea {
+            height: 140px;
+            resize: vertical;
+        }
+
+        .form-submit-btn {
+            display: block;
+            width: 100%;
+            background: #3f6f77;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        .form-submit-btn:hover {
+            background: #2d535c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .contact-note {
+            text-align: center;
+            font-size: 13px;
+            color: #9a9080;
+            margin-top: 15px;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        .left-page-content {
+            opacity: 0;
+        }
+
+        .book-outer {
+            background: #3a7ab8;
+            padding: 0;
+        }
+
+        .book-shadow {
+            max-width: 920px;
+            margin: 0 auto;
+            height: 18px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.35) 0%, transparent 70%);
+            position: relative;
+            top: -4px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media (max-width: 768px) {
+            .book-page-left, .book-spine {
+                display: none;
+            }
+            .book-page-right {
+                width: 100%;
+                border-radius: 0;
+            }
+            .book-spread {
+                max-width: 100%;
+            }
+            .page-content {
+                padding: 40px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body class="chapter-page">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html"><div class="logo"><img src="logo.png" alt="ספרות זולה"></div></a>
+    <div class="nav-center">
+        <a href="index.html">דף הבית</a>
+        <a href="about.html">אודות דוד אוראל</a>
+        <a href="news.html">עדכונים וחדשות</a>
+        <a href="contact.html" style="color:#d7b84a;">צרו קשר</a>
+    </div>
+    <div class="nav-left">
+        <span class="cart-link" onclick="toggleCart()">🛒 סל (<span id="cart-count">0</span>)</span>
+        <span style="color:white; font-size:14px; margin-right:15px;">🔒 Visa • Mastercard</span>
+    </div>
+</nav>
+
+<!-- BOOK SCENE -->
+<div class="book-outer">
+
+    <div class="book-top-band"></div>
+
+    <div class="book-spread">
+
+        <div class="book-page-left">
+            <div class="left-page-content">
+                
+            </div>
+        </div>
+
+        <div class="book-spine"></div>
+
+        <div class="book-page-right">
+            <div class="page-content">
+
+                <h1 class="chapter-title">צרו קשר</h1>
+                <div class="chapter-subtitle">נשמח לשמוע מכם</div>
+                <div class="page-divider"></div>
+
+                <form class="contact-form" onsubmit="handleContactSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">שם מלא</label>
+                        <input type="text" id="name" name="name" placeholder="הזינו את שמכם" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">דואר אלקטרוני</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">נושא</label>
+                        <input type="text" id="subject" name="subject" placeholder="נושא הפנייה">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">הודעה</label>
+                        <textarea id="message" name="message" placeholder="כתבו לנו את הודעתכם..." required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit-btn">שלח הודעה</button>
+                    <p class="contact-note">נציגנו יחזרו אליכם תוך 1–3 ימי עסקים</p>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="book-bottom-band"></div>
+    <div class="book-shadow"></div>
+
+    <!-- CHECKOUT POPUP -->
+    <div id="checkout-popup" class="checkout-popup">
+        <div class="checkout-popup-inner">
+            <button class="close-popup-btn" onclick="hideCheckoutPopup()">×</button>
+            <div class="checkout-popup-icon">📬</div>
+            <h2>הודעתך נשלחה!</h2>
+            <p>תודה שפניתם אלינו.<br>נחזור אליכם בהקדם האפשרי.</p>
+            <div class="checkout-popup-btns">
+                <button class="continue-btn" onclick="hideCheckoutPopup()">סגור</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART DRAWER -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>סל הקניות שלי</h3>
+            <button onclick="toggleCart()" class="close-btn">×</button>
+        </div>
+        <div id="cart-items" class="cart-items-list"></div>
+        <div class="cart-footer">
+            <div class="cart-subtotal-row">ספרים: <span id="cart-total">₪0</span></div>
+            <div id="cart-delivery" class="cart-delivery-row"></div>
+            <div id="cart-grand-total" class="total-row" style="display:none;"></div>
+            <button id="checkout-btn" class="checkout-btn" disabled>לתשלום מאובטח</button>
+        </div>
+    </div>
+    <div id="overlay" onclick="toggleCart()"></div>
+
+</div>
+
+</body>
+<script src="script.js"></script>
+<script>
+function handleContactSubmit(e) {
+    e.preventDefault();
+    hideCheckoutPopup(); // reuse the popup mechanism
+    document.getElementById('checkout-popup').style.display = 'flex';
+}
+</script>
+</html>
