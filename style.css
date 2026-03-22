@@ -672,3 +672,38 @@ body {
     line-height: 1.8;
   }
 }
+
+/* Footer */
+.site-footer {
+    background: #5f7d84;
+    color: white;
+    padding: 40px 0;
+    margin-top: 80px;
+    direction: rtl;
+}
+
+.footer-content {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.footer-menu {
+    margin-bottom: 15px;
+}
+
+.footer-menu a {
+    color: white;
+    margin: 0 18px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.footer-menu a:hover {
+    text-decoration: underline;
+}
+
+.footer-text {
+    font-size: 14px;
+    opacity: 0.85;
+}
