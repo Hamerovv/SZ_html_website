@@ -12,6 +12,40 @@ body {
   background: white;
 }
 
+/* ============= Header =================== */
+.site-header {
+    background: #5f7d84;
+    padding: 15px 0;
+    direction: rtl;
+}
+
+.header-container {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.main-menu a {
+    color: white;
+    margin: 0 18px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.main-menu a:hover {
+    text-decoration: underline;
+}
+
+.cart-area {
+    color: white;
+    font-size: 14px;
+}
 /* ================= NAVBAR ================= */
 
 .navbar {
