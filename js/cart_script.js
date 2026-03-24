@@ -1,52 +1,67 @@
-// ===================== CART =====================
-// Persistent cart using localStorage
-let cart = JSON.parse(localStorage.getItem('sifrutzola_cart')) || [];
+// ===================== CART & UPAY (גרסה סופית: שמירה קבועה + איסוף עצמי) =====================
 
-// Delivery options
+let cart = JSON.parse(localStorage.getItem('sifrutzola_cart')) || [];
 const DELIVERY_OPTIONS = [
     { id: 'regular', label: 'דואר רגיל', price: 20 },
-    { id: 'courier',  label: 'משלוח שליחים', price: 50 }
+    { id: 'courier', label: 'משלוח שליחים', price: 50 },
+    { id: 'pickup', label: 'איסוף עצמי', price: 0 }
 ];
-
-// Current selected delivery (default: regular)
 let selectedDelivery = 'regular';
 
-// ---- Toggle drawer ----
+// טעינת פרטי לקוח שמורים מהדפדפן (אם קיימים)
+let tempCustomerData = JSON.parse(localStorage.getItem('sifrutzola_customer')) || { name: '', email: '', phone: '', address: '' };
+
 function toggleCart() {
     const drawer = document.getElementById('cart-drawer');
     const overlay = document.getElementById('overlay');
     if (!drawer) return;
     drawer.classList.toggle('open');
-    overlay.style.display = drawer.classList.contains('open') ? 'block' : 'none';
+    if (overlay) overlay.style.display = drawer.classList.contains('open') ? 'block' : 'none';
 }
 
-// ---- Add item to cart ----
 function addToCart(name, price) {
     cart.push({ id: Date.now(), name, price });
     saveCart();
     updateUI();
-    toggleCart();
 }
 
-// ---- Remove item from cart ----
+function addToCartPopup(name, price) {
+    addToCart(name, price);
+    const popup = document.getElementById('checkout-popup');
+    if (popup) popup.style.display = 'flex';
+}
+
+function hideCheckoutPopup() {
+    const popup = document.getElementById('checkout-popup');
+    if (popup) popup.style.display = 'none';
+    toggleCart(); 
+}
+
 function removeFromCart(id) {
     cart = cart.filter(item => item.id !== id);
     saveCart();
     updateUI();
 }
 
-// ---- Select delivery method ----
 function selectDelivery(id) {
+    saveCurrentInputs(); // שמירה לפני החלפת מצב
     selectedDelivery = id;
     updateUI();
 }
 
-// ---- Save to localStorage ----
 function saveCart() {
     localStorage.setItem('sifrutzola_cart', JSON.stringify(cart));
 }
 
-// ---- Calculate totals ----
+// פונקציה ששומרת את הנתונים גם במשתנה וגם ב-LocalStorage
+function saveCurrentInputs() {
+    tempCustomerData.name = document.getElementById('cust-name')?.value || '';
+    tempCustomerData.email = document.getElementById('cust-email')?.value || '';
+    tempCustomerData.phone = document.getElementById('cust-phone')?.value || '';
+    tempCustomerData.address = document.getElementById('cust-address')?.value || '';
+    localStorage.setItem('sifrutzola_customer', JSON.stringify(tempCustomerData));
+}
+
 function getTotals() {
     let itemsTotal = 0;
     cart.forEach(item => itemsTotal += item.price);
@@ -55,58 +70,44 @@ function getTotals() {
     return { itemsTotal, deliveryPrice, grandTotal: itemsTotal + deliveryPrice };
 }
 
-// ---- Render delivery options HTML ----
-function deliveryOptionsHTML() {
+function customerFieldsHTML() {
     if (cart.length === 0) return '';
+    const isAddressRequired = selectedDelivery !== 'pickup';
     return `
-        <div class="delivery-section">
-            <div class="delivery-label">בחרו את דרך המשלוח:</div>
-            <div class="delivery-options">
-                ${DELIVERY_OPTIONS.map(d => `
-                    <label class="delivery-option ${selectedDelivery === d.id ? 'selected' : ''}" onclick="selectDelivery('${d.id}')">
-                        <input type="radio" name="delivery" value="${d.id}" ${selectedDelivery === d.id ? 'checked' : ''}>
-                        <span class="delivery-name">${d.label}</span>
-                        <span class="delivery-price">₪${d.price}</span>
-                    </label>
-                `).join('')}
-            </div>
+        <div class="customer-info" style="margin-top:15px; padding:10px; background:#f4f4f4; border-radius:8px;">
+            <div style="font-weight:bold; margin-bottom:8px;">פרטים למשלוח וקבלה:</div>
+            <input type="text" id="cust-name" placeholder="שם מלא (חובה)" value="${tempCustomerData.name}" oninput="saveCurrentInputs()" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            <input type="email" id="cust-email" placeholder="אימייל (חובה)" value="${tempCustomerData.email}" oninput="saveCurrentInputs()" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            <input type="tel" id="cust-phone" placeholder="טלפון נייד (חובה)" value="${tempCustomerData.phone}" oninput="saveCurrentInputs()" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            ${isAddressRequired ? `<input type="text" id="cust-address" placeholder="כתובת מלאה (עיר, רחוב, בית)" value="${tempCustomerData.address}" oninput="saveCurrentInputs()" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">` : ''}
+            <div id="validation-msg" style="color:red; font-size:12px; margin-top:8px; display:none; font-weight:bold;"></div>
         </div>
     `;
 }
 
-// ---- Render cart item HTML ----
-function cartItemHTML(item) {
-    return `
-        <div class="cart-item">
-            <div class="cart-item-info">
-                <span class="cart-item-name">${item.name}</span>
-                <span class="cart-item-price">₪${item.price}</span>
-            </div>
-            <button class="cart-remove-btn" onclick="removeFromCart(${item.id})" title="הסר מהסל">×</button>
-        </div>
-    `;
+function validateAndPay() {
+    saveCurrentInputs();
+    const { grandTotal } = getTotals();
+    const { name, email, phone, address } = tempCustomerData;
+
+    if (cart.length === 0 || grandTotal <= 0) { alert("הסל ריק"); return; }
+    if (!name || name.length < 2) { showError("נא להזין שם מלא"); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("נא להזין אימייל תקין"); return; }
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (cleanPhone.length < 9 || cleanPhone.length > 10) { showError("נא להזין טלפון תקין"); return; }
+    if (selectedDelivery !== 'pickup' && (!address || address.length < 5)) { showError("נא להזין כתובת מלאה"); return; }
+
+    const BASE_URL = "https://app.upay.co.il";
+    const deliveryLabel = DELIVERY_OPTIONS.find(d => d.id === selectedDelivery).label;
+    const desc = `ספרות זולה: ${cart.map(i => i.name).join(', ')} | משלוח: ${deliveryLabel} ${address || ''}`;
+    window.location.href = `${BASE_URL}&amount=${grandTotal}&contact=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(cleanPhone)}&description=${encodeURIComponent(desc)}`;
 }
 
-// ---- Add item + show checkout popup ----
-function addToCartPopup(name, price) {
-    addToCart(name, price);
-    showCheckoutPopup();
+function showError(msg) {
+    const errorEl = document.getElementById('validation-msg');
+    if (errorEl) { errorEl.innerText = msg; errorEl.style.display = 'block'; }
 }
 
-// ---- Show checkout popup ----
-function showCheckoutPopup() {
-    const popup = document.getElementById('checkout-popup');
-    if (!popup) return;
-    popup.style.display = 'flex';
-}
-
-// ---- Hide checkout popup ----
-function hideCheckoutPopup() {
-    const popup = document.getElementById('checkout-popup');
-    if (popup) popup.style.display = 'none';
-}
-
-// ---- Main UI update ----
 function updateUI() {
     const countEl = document.getElementById('cart-count');
     const itemsEl = document.getElementById('cart-items');
@@ -116,41 +117,70 @@ function updateUI() {
     const checkoutBtn = document.getElementById('checkout-btn');
 
     if (countEl) countEl.innerText = cart.length;
-
     if (!itemsEl) return;
 
     if (cart.length === 0) {
-        itemsEl.innerHTML = '<p class="cart-empty">הסל ריק</p>';
+        itemsEl.innerHTML = '<p style="text-align:center; padding:20px; color:#888;">הסל ריק</p>';
+        if (totalEl) totalEl.parentElement.style.display = 'flex';
+        if (totalEl) totalEl.parentElement.style.justifyContent = 'space-between';
+        if (totalEl) totalEl.parentElement.innerHTML = '<span>סכום ההזמנה:</span> <span id="cart-total">₪0</span>';
         if (deliveryEl) deliveryEl.innerHTML = '';
         if (grandTotalEl) grandTotalEl.style.display = 'none';
-        if (checkoutBtn) checkoutBtn.disabled = true;
-        if (totalEl) totalEl.innerText = '₪0';
+        if (checkoutBtn) { checkoutBtn.disabled = true; checkoutBtn.style.opacity = "0.5"; }
         return;
     }
 
-    if (checkoutBtn) checkoutBtn.disabled = false;
-
     const { itemsTotal, deliveryPrice, grandTotal } = getTotals();
 
-    let html = cart.map(item => cartItemHTML(item)).join('');
-    html += deliveryOptionsHTML();
+    let html = cart.map(item => `
+        <div class="cart-item" style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
+            <span>${item.name}</span>
+            <span>₪${item.price} <button onclick="removeFromCart(${item.id})" style="color:red; border:none; background:none; cursor:pointer;">×</button></span>
+        </div>
+    `).join('');
 
+    html += `
+        <div style="margin-top:10px; font-size:14px; background:#f9f9f9; padding:10px; border-radius:5px;">
+            <strong>אופן קבלת הספר:</strong><br>
+            ${DELIVERY_OPTIONS.map(d => `
+                <label style="display:flex; justify-content:space-between; align-items:center; margin:5px 0; cursor:pointer;">
+                    <span><input type="radio" name="del" onchange="selectDelivery('${d.id}')" ${selectedDelivery === d.id ? 'checked' : ''}> ${d.label}</span>
+                    <span>${d.price > 0 ? '₪' + d.price : 'חינם'}</span>
+                </label>
+            `).join('')}
+        </div>
+    `;
+
+    html += customerFieldsHTML();
     itemsEl.innerHTML = html;
 
-    if (totalEl) totalEl.innerText = `₪${itemsTotal}`;
-    if (deliveryEl) {
-        deliveryEl.innerHTML = `
-            <div class="delivery-row">
-                <span>משלוח (${DELIVERY_OPTIONS.find(d => d.id === selectedDelivery)?.label}):</span>
-                <span>₪${deliveryPrice}</span>
-            </div>
-        `;
+    if (totalEl) {
+        totalEl.parentElement.style.display = 'flex';
+        totalEl.parentElement.style.justifyContent = 'space-between';
+        totalEl.parentElement.innerHTML = `<span>סכום ההזמנה:</span> <span id="cart-total">₪${itemsTotal}</span>`;
     }
+    
+    if (deliveryEl) {
+        const delObj = DELIVERY_OPTIONS.find(d => d.id === selectedDelivery);
+        deliveryEl.style.display = 'flex';
+        deliveryEl.style.justifyContent = 'space-between';
+        deliveryEl.innerHTML = `<span>משלוח (${delObj.label}):</span> <span>₪${deliveryPrice}</span>`;
+    }
+
     if (grandTotalEl) {
         grandTotalEl.style.display = 'flex';
-        grandTotalEl.innerHTML = `<span>סה"כ לתשלום:</span><span>₪${grandTotal}</span>`;
+        grandTotalEl.style.justifyContent = 'space-between';
+        grandTotalEl.style.fontWeight = 'bold';
+        grandTotalEl.style.borderTop = '2px solid #eee';
+        grandTotalEl.style.paddingTop = '10px';
+        grandTotalEl.innerHTML = `<span>סה"כ לתשלום:</span> <span>₪${grandTotal}</span>`;
+    }
+
+    if (checkoutBtn) {
+        checkoutBtn.disabled = false;
+        checkoutBtn.style.opacity = "1";
+        checkoutBtn.onclick = validateAndPay;
     }
 }
 
-// ---- Init on page load ----
 document.addEventListener('DOMContentLoaded', updateUI);

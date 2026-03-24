@@ -4,75 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ספרות זולה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* ================= SUMMARY SECTION ================= */
-
-        .summary {
-            background: #4f7680;
-            color: white;
-            padding: 90px 20px;
-            text-align: center;
-        }
-
-        .summary h2 {
-            font-size: 48px;
-            font-weight: 300;
-        }
-
-        .gold-line {
-            width: 120px;
-            height: 4px;
-            background: #d1a64a;
-            margin: 25px auto;
-        }
-
-        .summary p {
-            max-width: 900px;
-            margin: 20px auto;
-            font-size: 20px;
-            line-height: 1.8;
-        }
-
-        /* ================= SECOND SECTION ================= */
-
-        .section-two {
-            display: flex;
-            align-items: center;
-        }
-
-        .section-two img {
-            width: 50%;
-            display: block;
-        }
-
-        .section-two .text {
-            width: 50%;
-            padding: 80px;
-        }
-
-        .section-two h2 {
-            font-size: 40px;
-            color: #3f5f67;
-            margin-bottom: 20px;
-        }
-
-        .section-two .text p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        /* ================= FOOTER ================= */
-
-        .footer {
-            background: #4f7680;
-            color: white;
-            text-align: center;
-            padding: 30px;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="css/book.css">
+    <link rel="stylesheet" href="css/index.css">
+    </head>
 
 <body>
 <!-- NAVBAR -->
@@ -95,7 +31,11 @@
 
         <div class="book-side">
             <img class="book-img" src="images/bookcover-ready.png" alt="כריכת הספר התבייתות">
-            <button class="add-cart-btn" onclick="addToCartPopup('התבייתות', 79)">🛒 הוסף לסל — ₪79</button>
+            <div class="add-cart-btn-wrap">
+                <button class="add-cart-btn" onclick="addToCartPopup('התבייתות', 79)">
+                    <img src="images/cart.png" alt="" class="btn-cart-icon"> הוסף לסל — ₪79
+                </button>
+            </div>
         </div>
 
     </div>

@@ -12,79 +12,190 @@ body {
   background: white;
 }
 
-/* ============= Header =================== */
+/* ============= UNIFIED SITE HEADER ============ */
 .site-header {
-    background: #5f7d84;
-    padding: 15px 0;
-    direction: rtl;
+    background: #3f6f77;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px;
+    color: white;
 }
 
 .header-container {
-    width: 95%;
-    margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.logo img {
-    height: 40px;
+.site-header .logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+.main-menu {
+    display: flex;
+    gap: 30px;
 }
 
 .main-menu a {
     color: white;
-    margin: 0 18px;
     text-decoration: none;
     font-size: 16px;
+    transition: 0.3s;
 }
 
 .main-menu a:hover {
-    text-decoration: underline;
+    color: #d7b84a;
 }
 
+/* ============= CART AREA ============ */
 .cart-area {
-    color: white;
-    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: 0.3s;
+    position: relative;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid transparent;
 }
-/* ================= NAVBAR ================= */
 
+.cart-area:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.3);
+}
+
+/* Cart has items — more visible */
+.cart-area.has-items {
+    background: #d7b84a;
+    border-color: #c9a83a;
+}
+
+.cart-area.has-items:hover {
+    background: #c9a83a;
+    border-color: #b89030;
+}
+
+/* Pulsing dot when cart has items */
+.cart-area.has-items::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 12px;
+    height: 12px;
+    background: #e74c3c;
+    border-radius: 50%;
+    border: 2px solid #3f6f77;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(231,76,60,0.5); }
+    70%  { box-shadow: 0 0 0 8px rgba(231,76,60,0); }
+    100% { box-shadow: 0 0 0 0 rgba(231,76,60,0); }
+}
+
+.cart-icon {
+    height: 20px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.cart-label {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.cart-badge {
+    background: rgba(255,255,255,0.25);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 12px;
+    min-width: 22px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.cart-area.has-items .cart-badge {
+    background: white;
+    color: #3f6f77;
+}
+
+.secure-badge {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-right: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.payment-icon {
+    height: 18px;
+    width: auto;
+    opacity: 0.9;
+    vertical-align: middle;
+}
+
+.cart-area.has-items .payment-icon {
+    opacity: 1;
+}
+
+/* ============= LEGACY navbar class (backward compat) */
+/* ===== navbar alias for .site-header (backward compat) ===== */
 .navbar {
   background: #3f6f77;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 60px;
+  padding: 18px 60px;
   color: white;
 }
 
-.logo {
+.navbar .logo {
   font-size: 34px;
   font-weight: 800;
 }
 
-.logo img {
+.navbar .logo img {
   height: 50px;
   width: auto;
   display: block;
 }
 
-.nav-center {
+.navbar .nav-center {
   display: flex;
   gap: 35px;
 }
 
-.nav-center a {
+.navbar .nav-center a {
   color: white;
   text-decoration: none;
   font-size: 17px;
   transition: 0.3s;
 }
 
-.nav-center a:hover {
+.navbar .nav-center a:hover {
   color: #d7b84a;
 }
 
-.nav-left img {
+.navbar .nav-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar .nav-left img {
   height: 24px;
   margin-left: 10px;
 }
@@ -125,6 +236,9 @@ body {
 .book-side {
   text-align: center;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .book-img {
@@ -197,8 +311,9 @@ body {
 /* Hero book-side add to cart button */
 
 .add-cart-btn {
-  display: block;
-  margin: 5px auto 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: #2f5f66;
   color: white;
   border: none;
@@ -210,12 +325,19 @@ body {
   cursor: pointer;
   transition: 0.2s;
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  margin-top: 0;
+  align-self: center;
 }
 
 .add-cart-btn:hover {
   background: #1e4048;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.btn-cart-icon {
+  width: 18px;
+  height: auto;
 }
 
 /* ================= CART DRAWER ================= */
@@ -343,96 +465,7 @@ body {
   }
 }
 
-/* ================= PEREK (CHAPTER PAGE ONLY) ================= */
 
-/* Page background */
-
-.chapter-page {
-  background: #f8f6f2;
-}
-
-/* Container */
-
-.chapter-page .chapter-container {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 0 20px;
-}
-
-/* Titles */
-
-.chapter-page .chapter-title {
-  font-size: 38px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.chapter-page .chapter-subtitle {
-  text-align: center;
-  font-size: 18px;
-  color: #888;
-  margin-bottom: 30px;
-}
-
-/* Gold divider */
-
-.chapter-page .divider {
-  width: 80px;
-  height: 4px;
-  background: #d7b84a;
-  margin: 20px auto 50px;
-  border-radius: 2px;
-}
-
-/* Text block */
-
-.chapter-page .book-text {
-  direction: rtl;
-  text-align: justify;
-  line-height: 1.9;
-  font-size: 18px;
-  color: #222;
-}
-
-/* Paragraph spacing */
-
-.chapter-page .book-text p {
-  margin-bottom: 1.4em;
-}
-
-/* Dialog line spacing */
-
-.chapter-page .book-text p br {
-  line-height: 2;
-}
-
-/* Drop cap (first letter) */
-
-.chapter-page .book-text p:first-child::first-letter {
-  font-size: 48px;
-  font-weight: 800;
-  float: right;
-  margin-left: 10px;
-  line-height: 1;
-}
-
-/* Footer */
-
-.chapter-page .footer {
-  text-align: center;
-  margin: 80px 0 40px;
-}
-
-.chapter-page .back-btn {
-  background: #2f5f66;
-  color: white;
-  padding: 12px 30px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-/* ===== CHECKOUT POPUP ===== */
 
 .checkout-popup {
     display: none;
@@ -694,50 +727,107 @@ body {
     margin-top: 5px;
 }
 
-/* Chapter responsive */
+/* ===== SITE HEADER (matches index navbar) ===== */
 
-@media (max-width: 768px) {
-  .chapter-page .chapter-title {
-    font-size: 28px;
-  }
-
-  .chapter-page .book-text {
-    font-size: 16px;
-    line-height: 1.8;
-  }
+.site-header {
+    background: #3f6f77;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px;
+    color: white;
 }
 
-/* Footer */
-.site-footer {
-    background: #5f7d84;
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.site-header .logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+.main-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.main-menu a {
     color: white;
-    padding: 40px 0;
-    margin-top: 80px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.main-menu a:hover {
+    color: #d7b84a;
+}
+
+/* ===== SITE FOOTER (matches index footer) ===== */
+
+.site-footer {
+    background: #4f7680;
+    color: white;
+    text-align: center;
+    padding: 30px;
     direction: rtl;
 }
 
 .footer-content {
-    width: 90%;
-    margin: auto;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
-.footer-menu {
-    margin-bottom: 15px;
+.footer-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }
 
-.footer-menu a {
+.footer-links a {
     color: white;
-    margin: 0 18px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 15px;
+    transition: 0.3s;
 }
 
-.footer-menu a:hover {
-    text-decoration: underline;
+.footer-links a:hover {
+    color: #d7b84a;
+}
+
+.footer-sep {
+    color: rgba(255,255,255,0.4);
 }
 
 .footer-text {
-    font-size: 14px;
-    opacity: 0.85;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+}
+
+/* Chapter responsive */
+
+@media (max-width: 768px) {
+  .site-header {
+      padding: 14px 20px;
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .main-menu {
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+
+  .main-menu a {
+      font-size: 14px;
+  }
 }
