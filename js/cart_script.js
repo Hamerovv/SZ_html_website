@@ -93,23 +93,24 @@ function validateAndPay() {
     if (cart.length === 0 || grandTotal <= 0) { alert("הסל ריק"); return; }
     if (!name || name.length < 2) { showError("נא להזין שם מלא"); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("נא להזין אימייל תקין"); return; }
-    
     const cleanPhone = phone.replace(/\D/g, '');
     if (cleanPhone.length < 9 || cleanPhone.length > 10) { showError("נא להזין טלפון תקין"); return; }
     if (selectedDelivery !== 'pickup' && (!address || address.length < 5)) { showError("נא להזין כתובת מלאה"); return; }
 
-    // הקישור המלא של uPay (כולל ה-ID האישי שלך)
-    const BASE_URL = "https://app.upay.co.il";
+    // --- הקישור המעודכן שלך כאן ---
+    const BASE_URL = "https://app.upay.co.il/API6/s.php?m=LzBUVk0vK0FtdW03VkxWbUVzK1E3QT09";
+    
     const deliveryLabel = DELIVERY_OPTIONS.find(d => d.id === selectedDelivery).label;
     const itemsNames = cart.map(i => i.name).join(', ');
     const desc = `ספרות זולה: ${itemsNames} | משלוח: ${deliveryLabel} ${address ? '| כתובת: ' + address : ''}`;
     
-    // יצירת הכתובת הסופית
+    // בניית הכתובת הסופית עם & לפני הפרמטרים הנוספים
     const finalUrl = `${BASE_URL}&amount=${grandTotal}&contact=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(cleanPhone)}&description=${encodeURIComponent(desc)}`;
     
     console.log("Redirecting to:", finalUrl); 
     window.location.href = finalUrl;
 }
+
 
 function showError(msg) {
     const errorEl = document.getElementById('validation-msg');
