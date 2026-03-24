@@ -1,20 +1,20 @@
 /* ================= BOOK-SPREAD PAGE DESIGN ================= */
 
 .chapter-page {
-    background: #3a7ab8;
+    background: #4f7680;
     min-height: 100vh;
     font-family: 'Frank Ruhl Libre', serif;
 }
 
 .book-outer {
-    background: #3a7ab8;
+    background: #4f7680;
     padding: 0;
 }
 
 .book-scene {
     position: relative;
     padding: 0 0 80px 0;
-    background: #3a7ab8;
+    background: #4f7680;
 }
 
 .book-spread {
@@ -53,17 +53,17 @@
 }
 
 .book-top-band {
-    background: #3a7ab8;
+    background: #4f7680;
     height: 50px;
     width: 100%;
-    border-bottom: 3px solid #2d6096;
+    border-bottom: 3px solid #3a5f68;
 }
 
 .book-bottom-band {
-    background: #3a7ab8;
+    background: #4f7680;
     height: 40px;
     width: 100%;
-    border-top: 3px solid #2d6096;
+    border-top: 3px solid #3a5f68;
 }
 
 .book-page-left::after {
