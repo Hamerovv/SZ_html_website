@@ -11,6 +11,8 @@
     </head>
 
 <body>
+<div id="floating-words"></div>
+
 <!-- NAVBAR -->
 <script src="js/header.js"></script>
 
@@ -132,6 +134,28 @@
 <!-- FOOTER -->
 <script src="js/footer.js"></script>
 <script src="js/cart_script.js"></script>
+<script>
+/* ===== FLOATING WORDS EFFECT ===== */
+(function() {
+    const words = ["מוסד", "מרגלים", "ריגול", "צה״ל", "מתח", "פטריוטים", "מבצעים", "פוליטיקה", "שחיתות", "ישראל"];
+    const container = document.getElementById('floating-words');
+
+    function spawn() {
+        if (!container) return;
+        const el = document.createElement('div');
+        el.className = 'fw-word';
+        el.textContent = words[Math.floor(Math.random() * words.length)];
+        el.style.left = (5 + Math.random() * 85) + 'vw';
+        el.style.top  = (5 + Math.random() * 85) + 'vh';
+        el.style.fontSize = (18 + Math.floor(Math.random() * 30)) + 'px';
+        container.appendChild(el);
+        setTimeout(function() { if (el.parentNode) el.remove(); }, 14000);
+    }
+
+    spawn(); spawn(); spawn(); spawn();
+    setInterval(spawn, 2500);
+})();
+</script>
 </body>
 
 </html>
