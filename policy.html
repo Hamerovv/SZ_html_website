@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תקנון האתר | התבייתות</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book.css">
+    <link rel="stylesheet" href="css/policy.css">
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+    </head>
+
+<body class="chapter-page">
+
+<!-- NAVBAR -->
+<script src="js/header.js"></script>
+
+<!-- BOOK SCENE -->
+<div class="book-outer">
+
+    <div class="book-top-band"></div>
+
+    <div class="book-spread">
+
+        <div class="book-page-left">
+            <div class="left-page-content"></div>
+        </div>
+
+        <div class="book-spine"></div>
+
+        <div class="book-page-right">
+            <div class="page-content">
+
+                <h1 class="chapter-title">תקנון האתר</h1>
+                <div class="chapter-subtitle">מדיניות החנות ותנאי השימוש</div>
+                <div class="page-divider"></div>
+
+                <div class="policy-content">
+
+                    <p class="policy-welcome">
+                        מדיניות החנות<br>ברוכים הבאים לחנות הספרים שלנו!<br>אנו שמחים שאתם בחרתם לקנות אצלנו.<br>אנא קראו את מדיניות החנות שלנו כדי להבין את התנאים והשירותים המוצעים.
+                    </p>
+
+                    <h2>הזמנות ושילוח</h2>
+                    <p>
+                        כל ההזמנות יטופלו תוך 2-3 ימי עבודה. זמני השילוח משתנים בהתאם לאזור המגורים, ויכולים לנוע בין 7 ל-14 ימי עבודה. עלות השילוח משתנה לפי יעד ומשקל ההזמנה.
+                    </p>
+
+                    <h2>החזרות והחזרות כספים</h2>
+                    <p>
+                        ניתן להחזיר מוצרים תוך 14 יום מיום קבלת ההזמנה, בתנאי שהמוצר נמצא במצב חדש, ללא שימוש ועם האריזה המקורית. החזרות כספים יבוצעו תוך 7 ימי עבודה לאחר קבלת המוצר בחזרה.
+                    </p>
+
+                    <h2>תשלומים</h2>
+                    <p>
+                        אנו מקבלים תשלום באמצעות כרטיסי אשראי, פייפל, והעברה בנקאית. כל המחירים באתר כוללים מע"מ, אך לא כוללים עלויות משלוח.
+                    </p>
+
+                    <h2>הגנת פרטיות</h2>
+                    <p>
+                        אנו מתחייבים לשמור על פרטיותך ולמנוע גישה לא מורשית למידע האישי שלך. אנו לא נעביר את פרטי המשתמש לצדדים שלישיים ללא אישורך.
+                    </p>
+
+                    <h2>שירות לקוחות</h2>
+                    <p>
+                        אם יש לך שאלות או בקשות, אתה מוזמן לפנות אלינו דרך <a href="contact.html">טופס יצירת הקשר</a>.
+                    </p>
+
+                    <p class="policy-thanks">
+                        תודה על רכישתך, אנחנו כאן כדי לעזור ולהבטיח חווית קנייה נעימה!
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="book-bottom-band"></div>
+    <div class="book-shadow"></div>
+
+    <!-- CART DRAWER -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>סל הקניות שלי</h3>
+            <button onclick="toggleCart()" class="close-btn">×</button>
+        </div>
+        <div id="cart-items" class="cart-items-list"></div>
+        <div class="cart-footer">
+            <div class="cart-subtotal-row">ספרים: <span id="cart-total">₪0</span></div>
+            <div id="cart-delivery" class="cart-delivery-row"></div>
+            <div id="cart-grand-total" class="total-row" style="display:none;"></div>
+            <button id="checkout-btn" class="checkout-btn" disabled>לתשלום מאובטח</button>
+        </div>
+    </div>
+    <div id="overlay" onclick="toggleCart()"></div>
+
+</div>
+
+<!-- FOOTER -->
+<script src="js/footer.js"></script>
+<script src="js/cart_script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+/* ===== SIFRUTZOLA PAGE (same as about) ===== */
+.about-content {
+    direction: rtl;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.about-content p {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 17px;
+    line-height: 2;
+    color: #2a2018;
+    margin-bottom: 1.2em;
+}
+
+.about-content p:first-child::first-letter {
+    font-size: 48px;
+    font-weight: 900;
+    float: right;
+    margin-left: 10px;
+    line-height: 0.85;
+    color: #3a7ab8;
+    font-family: 'Frank Ruhl Libre', serif;
+}

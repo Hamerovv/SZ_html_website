@@ -1,0 +1,154 @@
+/* ================= BOOK-SPREAD PAGE DESIGN ================= */
+
+.chapter-page {
+    background: #3a7ab8;
+    min-height: 100vh;
+    font-family: 'Frank Ruhl Libre', serif;
+}
+
+.book-outer {
+    background: #3a7ab8;
+    padding: 0;
+}
+
+.book-scene {
+    position: relative;
+    padding: 0 0 80px 0;
+    background: #3a7ab8;
+}
+
+.book-spread {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    min-height: 700px;
+    overflow: hidden;
+}
+
+.book-page-left {
+    width: 120px;
+    flex-shrink: 0;
+    background: linear-gradient(to left, #dedad2 0%, #eae6de 40%, #f2efe8 100%);
+    position: relative;
+    box-shadow: inset -8px 0 20px rgba(0,0,0,0.10);
+}
+
+.book-spine {
+    width: 22px;
+    flex-shrink: 0;
+    position: relative;
+    background: linear-gradient(to right, #b0a898 0%, #d8d2c8 25%, #eceae4 50%, #d4cfc5 75%, #a8a098 100%);
+    box-shadow: 0 0 18px rgba(0,0,0,0.28), inset 0 0 8px rgba(0,0,0,0.08);
+    z-index: 2;
+}
+
+.book-page-right {
+    flex: 1;
+    background: linear-gradient(to right, #edeae2 0%, #f5f2eb 8%, #faf8f4 40%, #fdfcf9 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 4px 8px 35px rgba(0,0,0,0.20);
+}
+
+.book-top-band {
+    background: #3a7ab8;
+    height: 50px;
+    width: 100%;
+    border-bottom: 3px solid #2d6096;
+}
+
+.book-bottom-band {
+    background: #3a7ab8;
+    height: 40px;
+    width: 100%;
+    border-top: 3px solid #2d6096;
+}
+
+.book-page-left::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 8px;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(to bottom, #d0ccc4, #b8b4ac);
+    border-radius: 0 0 0 4px;
+}
+
+.book-page-right::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    right: 8px;
+    height: 6px;
+    background: linear-gradient(to bottom, #d0ccc4, #b8b4ac);
+    border-radius: 0 0 4px 0;
+}
+
+.book-shadow {
+    max-width: 920px;
+    margin: 0 auto;
+    height: 18px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.35) 0%, transparent 70%);
+    position: relative;
+    top: -4px;
+}
+
+.page-content {
+    position: relative;
+    z-index: 1;
+    padding: 55px 80px 55px 70px;
+}
+
+.chapter-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #2a2018;
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+}
+
+.chapter-subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #9a9080;
+    font-family: 'Heebo', sans-serif;
+    font-weight: 300;
+    margin-bottom: 18px;
+    letter-spacing: 0.05em;
+}
+
+.page-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #d7b84a, #c9a83a);
+    margin: 0 auto 30px;
+    border-radius: 2px;
+}
+
+.left-page-content {
+    opacity: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+    .book-page-left, .book-spine {
+        display: none;
+    }
+    .book-page-right {
+        width: 100%;
+        border-radius: 0;
+    }
+    .book-spread {
+        max-width: 100%;
+    }
+    .page-content {
+        padding: 40px 25px;
+    }
+}

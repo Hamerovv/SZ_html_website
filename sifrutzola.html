@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ספרות זולה | התבייתות</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book.css">
+    <link rel="stylesheet" href="css/sifrutzola.css">
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;600&display=swap" rel="stylesheet">
+    </head>
+
+<body class="chapter-page">
+
+<!-- NAVBAR -->
+<script src="js/header.js"></script>
+
+<!-- BOOK SCENE -->
+<div class="book-outer">
+
+    <div class="book-top-band"></div>
+
+    <div class="book-spread">
+
+        <div class="book-page-left">
+            <div class="left-page-content"></div>
+        </div>
+
+        <div class="book-spine"></div>
+
+        <div class="book-page-right">
+            <div class="page-content">
+
+                <h1 class="chapter-title">ספרות זולה</h1>
+                <div class="chapter-subtitle">מי אנחנו ומה אנחנו עושים</div>
+                <div class="page-divider"></div>
+
+                <div class="about-content">
+                    <p>
+                        ספרות זולה היא חברה פרטית אשר יעודה לעודד ספרות איכותית בישראל.
+                    </p>
+                    <p>
+                        החברה תשמח לשתף פעולה כל מי שרואה בעידוד ספרות איכותית כמטרה הנם מוזמנים ליצור קשר בטופס יצירת הקשר.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="book-bottom-band"></div>
+    <div class="book-shadow"></div>
+
+    <!-- CART DRAWER -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>סל הקניות שלי</h3>
+            <button onclick="toggleCart()" class="close-btn">×</button>
+        </div>
+        <div id="cart-items" class="cart-items-list"></div>
+        <div class="cart-footer">
+            <div class="cart-subtotal-row">ספרים: <span id="cart-total">₪0</span></div>
+            <div id="cart-delivery" class="cart-delivery-row"></div>
+            <div id="cart-grand-total" class="total-row" style="display:none;"></div>
+            <button id="checkout-btn" class="checkout-btn" disabled>לתשלום מאובטח</button>
+        </div>
+    </div>
+    <div id="overlay" onclick="toggleCart()"></div>
+
+</div>
+
+<!-- FOOTER -->
+<script src="js/footer.js"></script>
+<script src="js/cart_script.js"></script>
+
+</body>
+
+</html>

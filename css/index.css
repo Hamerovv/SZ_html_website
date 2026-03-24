@@ -1,0 +1,54 @@
+/* ================= SUMMARY SECTION ================= */
+.summary {
+    background: #4f7680;
+    color: white;
+    padding: 90px 20px;
+    text-align: center;
+}
+
+.summary h2 {
+    font-size: 48px;
+    font-weight: 300;
+}
+
+.gold-line {
+    width: 120px;
+    height: 4px;
+    background: #d1a64a;
+    margin: 25px auto;
+}
+
+.summary p {
+    max-width: 900px;
+    margin: 20px auto;
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+/* ================= SECOND SECTION ================= */
+.section-two {
+    display: flex;
+    align-items: center;
+}
+
+.section-two img {
+    width: 50%;
+    display: block;
+}
+
+.section-two .text {
+    width: 50%;
+    padding: 80px;
+}
+
+.section-two h2 {
+    font-size: 40px;
+    color: #3f5f67;
+    margin-bottom: 20px;
+}
+
+.section-two .text p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+}
