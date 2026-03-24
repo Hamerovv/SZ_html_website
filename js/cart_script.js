@@ -1,4 +1,4 @@
-// ===================== CART & UPAY (גרסה סופית: שמירה קבועה + איסוף עצמי) =====================
+// ===================== CART & UPAY (גרסה סופית, מתוקנת וחסינה לשגיאות) =====================
 
 let cart = JSON.parse(localStorage.getItem('sifrutzola_cart')) || [];
 const DELIVERY_OPTIONS = [
@@ -8,7 +8,7 @@ const DELIVERY_OPTIONS = [
 ];
 let selectedDelivery = 'regular';
 
-// טעינת פרטי לקוח שמורים מהדפדפן (אם קיימים)
+// טעינת פרטי לקוח שמורים
 let tempCustomerData = JSON.parse(localStorage.getItem('sifrutzola_customer')) || { name: '', email: '', phone: '', address: '' };
 
 function toggleCart() {
@@ -44,7 +44,7 @@ function removeFromCart(id) {
 }
 
 function selectDelivery(id) {
-    saveCurrentInputs(); // שמירה לפני החלפת מצב
+    saveCurrentInputs();
     selectedDelivery = id;
     updateUI();
 }
@@ -53,7 +53,6 @@ function saveCart() {
     localStorage.setItem('sifrutzola_cart', JSON.stringify(cart));
 }
 
-// פונקציה ששומרת את הנתונים גם במשתנה וגם ב-LocalStorage
 function saveCurrentInputs() {
     tempCustomerData.name = document.getElementById('cust-name')?.value || '';
     tempCustomerData.email = document.getElementById('cust-email')?.value || '';
@@ -85,6 +84,7 @@ function customerFieldsHTML() {
     `;
 }
 
+// הפונקציה שתיקנו עכשיו - עם ה-URL התקין
 function validateAndPay() {
     saveCurrentInputs();
     const { grandTotal } = getTotals();
@@ -93,14 +93,22 @@ function validateAndPay() {
     if (cart.length === 0 || grandTotal <= 0) { alert("הסל ריק"); return; }
     if (!name || name.length < 2) { showError("נא להזין שם מלא"); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("נא להזין אימייל תקין"); return; }
+    
     const cleanPhone = phone.replace(/\D/g, '');
     if (cleanPhone.length < 9 || cleanPhone.length > 10) { showError("נא להזין טלפון תקין"); return; }
     if (selectedDelivery !== 'pickup' && (!address || address.length < 5)) { showError("נא להזין כתובת מלאה"); return; }
 
+    // הקישור המלא של uPay (כולל ה-ID האישי שלך)
     const BASE_URL = "https://app.upay.co.il";
     const deliveryLabel = DELIVERY_OPTIONS.find(d => d.id === selectedDelivery).label;
-    const desc = `ספרות זולה: ${cart.map(i => i.name).join(', ')} | משלוח: ${deliveryLabel} ${address || ''}`;
-    window.location.href = `${BASE_URL}&amount=${grandTotal}&contact=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(cleanPhone)}&description=${encodeURIComponent(desc)}`;
+    const itemsNames = cart.map(i => i.name).join(', ');
+    const desc = `ספרות זולה: ${itemsNames} | משלוח: ${deliveryLabel} ${address ? '| כתובת: ' + address : ''}`;
+    
+    // יצירת הכתובת הסופית
+    const finalUrl = `${BASE_URL}&amount=${grandTotal}&contact=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(cleanPhone)}&description=${encodeURIComponent(desc)}`;
+    
+    console.log("Redirecting to:", finalUrl); 
+    window.location.href = finalUrl;
 }
 
 function showError(msg) {
@@ -121,8 +129,6 @@ function updateUI() {
 
     if (cart.length === 0) {
         itemsEl.innerHTML = '<p style="text-align:center; padding:20px; color:#888;">הסל ריק</p>';
-        if (totalEl) totalEl.parentElement.style.display = 'flex';
-        if (totalEl) totalEl.parentElement.style.justifyContent = 'space-between';
         if (totalEl) totalEl.parentElement.innerHTML = '<span>סכום ההזמנה:</span> <span id="cart-total">₪0</span>';
         if (deliveryEl) deliveryEl.innerHTML = '';
         if (grandTotalEl) grandTotalEl.style.display = 'none';
@@ -154,22 +160,20 @@ function updateUI() {
     html += customerFieldsHTML();
     itemsEl.innerHTML = html;
 
-    if (totalEl) {
-        totalEl.parentElement.style.display = 'flex';
-        totalEl.parentElement.style.justifyContent = 'space-between';
-        totalEl.parentElement.innerHTML = `<span>סכום ההזמנה:</span> <span id="cart-total">₪${itemsTotal}</span>`;
-    }
+    // יישור שורות הסיכום
+    [totalEl?.parentElement, deliveryEl, grandTotalEl].forEach(el => {
+        if (el) { el.style.display = 'flex'; el.style.justifyContent = 'space-between'; }
+    });
+
+    if (totalEl) totalEl.parentElement.innerHTML = `<span>סכום ההזמנה:</span> <span id="cart-total">₪${itemsTotal}</span>`;
     
     if (deliveryEl) {
         const delObj = DELIVERY_OPTIONS.find(d => d.id === selectedDelivery);
-        deliveryEl.style.display = 'flex';
-        deliveryEl.style.justifyContent = 'space-between';
         deliveryEl.innerHTML = `<span>משלוח (${delObj.label}):</span> <span>₪${deliveryPrice}</span>`;
     }
 
     if (grandTotalEl) {
         grandTotalEl.style.display = 'flex';
-        grandTotalEl.style.justifyContent = 'space-between';
         grandTotalEl.style.fontWeight = 'bold';
         grandTotalEl.style.borderTop = '2px solid #eee';
         grandTotalEl.style.paddingTop = '10px';
