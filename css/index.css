@@ -16,9 +16,9 @@
     font-weight: 700;
     white-space: nowrap;
     user-select: none;
-    opacity: 0;
-    color: rgba(0, 0, 0, 0.07);
-    filter: blur(1px);
+    opacity: 1;
+    color: rgba(0, 0, 0, 1);
+    filter: blur(0px);
     animation: fw-float linear forwards;
     will-change: transform, opacity;
 }
