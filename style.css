@@ -1,0 +1,464 @@
+/* ================= GLOBAL ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  direction: rtl;
+  background: white;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+  background: #3f6f77;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  color: white;
+}
+
+.logo {
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+.nav-center {
+  display: flex;
+  gap: 35px;
+}
+
+.nav-center a {
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  transition: 0.3s;
+}
+
+.nav-center a:hover {
+  color: #d7b84a;
+}
+
+.nav-left img {
+  height: 24px;
+  margin-left: 10px;
+}
+
+/* ================= HERO (HOMEPAGE) ================= */
+
+.hero {
+  position: relative;
+  background: #c2a24c;
+  height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(194,162,76,0.9);
+  top: 0;
+  left: 0;
+}
+
+.hero-content {
+  position: relative;
+  display: flex;
+  width: 90%;
+  max-width: 1400px;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+/* BOOK SIDE */
+
+.book-side {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.book-img {
+  width: 520px;
+  margin-bottom: 0;
+}
+
+.buy-btn {
+  background: #2f5f66;
+  color: white;
+  border: none;
+  padding: 14px 50px;
+  border-radius: 12px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.price-blue {
+  font-size: 28px;
+  color: #2f5f66;
+  font-weight: 600;
+}
+
+/* TEXT SIDE */
+
+.text-side {
+  text-align: right;
+  max-width: 550px;
+}
+
+.headline {
+  font-size: 40px;
+  color: #8a0d0d;
+  margin-bottom: 20px;
+}
+
+.subheadline {
+  font-size: 28px;
+  color: black;
+  font-weight: 400;
+  margin-bottom: 35px;
+}
+
+.cta-btn {
+  background: #a61717;
+  color: white;
+  border: none;
+  padding: 16px 60px;
+  border-radius: 30px;
+  font-size: 16px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.price-area {
+  font-size: 26px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  margin-left: 15px;
+  color: #8a0d0d;
+}
+
+.new-price {
+  color: #8a0d0d;
+  font-weight: 600;
+}
+
+/* ================= CART AREA (NAVBAR) ================= */
+
+.cart-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.3s;
+  position: relative;
+}
+
+.cart-area:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.cart-area.has-items {
+  background: rgba(255,255,255,0.2);
+}
+
+.cart-area.has-items::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 12px;
+  height: 12px;
+  background: #d1a64a;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.cart-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.cart-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+.cart-badge {
+  background: #d1a64a;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+}
+
+.cart-area.has-items .cart-badge {
+  background: #8a0d0d;
+}
+
+.secure-badge {
+  display: flex;
+  align-items: center;
+}
+
+.payment-icon {
+  height: 22px;
+  opacity: 0.9;
+}
+
+/* ================= CART DRAWER ================= */
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  left: -420px;
+  width: 400px;
+  height: 100vh;
+  background: white;
+  box-shadow: -4px 0 30px rgba(0,0,0,0.2);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  transition: left 0.35s ease;
+  direction: rtl;
+}
+
+.cart-drawer.open {
+  left: 0;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #eee;
+  background: #f8f6f2;
+}
+
+.cart-header h3 {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 22px;
+  color: #2a2018;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.cart-items-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+}
+
+.cart-items-list p {
+  text-align: center;
+  color: #888;
+  font-size: 15px;
+  padding: 40px 0;
+}
+
+.cart-footer {
+  padding: 20px 24px;
+  border-top: 1px solid #eee;
+  background: #f8f6f2;
+}
+
+.cart-subtotal-row {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2a2018;
+}
+
+.cart-delivery-row {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.total-row {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2a2018;
+  margin-bottom: 15px;
+}
+
+.checkout-btn {
+  width: 100%;
+  background: #3f6f77;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.checkout-btn:hover {
+  background: #2d535c;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1000px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .book-img {
+    width: 220px;
+  }
+
+  .hero {
+    height: auto;
+    padding: 60px 0;
+  }
+}
+
+/* ================= PEREK (CHAPTER PAGE ONLY) ================= */
+
+/* Page background */
+
+.chapter-page {
+  background: #f8f6f2;
+}
+
+/* Container */
+
+.chapter-page .chapter-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+/* Titles */
+
+.chapter-page .chapter-title {
+  font-size: 38px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.chapter-page .chapter-subtitle {
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+  margin-bottom: 30px;
+}
+
+/* Gold divider */
+
+.chapter-page .divider {
+  width: 80px;
+  height: 4px;
+  background: #d7b84a;
+  margin: 20px auto 50px;
+  border-radius: 2px;
+}
+
+/* Text block */
+
+.chapter-page .book-text {
+  direction: rtl;
+  text-align: justify;
+  line-height: 1.9;
+  font-size: 18px;
+  color: #222;
+}
+
+/* Paragraph spacing */
+
+.chapter-page .book-text p {
+  margin-bottom: 1.4em;
+}
+
+/* Dialog line spacing */
+
+.chapter-page .book-text p br {
+  line-height: 2;
+}
+
+/* Drop cap (first letter) */
+
+.chapter-page .book-text p:first-child::first-letter {
+  font-size: 48px;
+  font-weight: 800;
+  float: right;
+  margin-left: 10px;
+  line-height: 1;
+}
+
+/* Footer */
+
+.chapter-page .footer {
+  text-align: center;
+  margin: 80px 0 40px;
+}
+
+.chapter-page .back-btn {
+  background: #2f5f66;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Chapter responsive */
+
+@media (max-width: 768px) {
+  .chapter-page .chapter-title {
+    font-size: 28px;
+  }
+
+  .chapter-page .book-text {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+}
