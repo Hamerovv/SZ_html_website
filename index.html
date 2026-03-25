@@ -4,89 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ספרות זולה</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* ================= SUMMARY SECTION ================= */
-
-        .summary {
-            background: #4f7680;
-            color: white;
-            padding: 90px 20px;
-            text-align: center;
-        }
-
-        .summary h2 {
-            font-size: 48px;
-            font-weight: 300;
-        }
-
-        .gold-line {
-            width: 120px;
-            height: 4px;
-            background: #d1a64a;
-            margin: 25px auto;
-        }
-
-        .summary p {
-            max-width: 900px;
-            margin: 20px auto;
-            font-size: 20px;
-            line-height: 1.8;
-        }
-
-        /* ================= SECOND SECTION ================= */
-
-        .section-two {
-            display: flex;
-            align-items: center;
-        }
-
-        .section-two img {
-            width: 50%;
-            display: block;
-        }
-
-        .section-two .text {
-            width: 50%;
-            padding: 80px;
-        }
-
-        .section-two h2 {
-            font-size: 40px;
-            color: #3f5f67;
-            margin-bottom: 20px;
-        }
-
-        .section-two .text p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        /* ================= FOOTER ================= */
-
-        .footer {
-            background: #4f7680;
-            color: white;
-            text-align: center;
-            padding: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
-<div id="floating-words" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;pointer-events:none;">
-<style>
-@keyframes floatDrift {
-    0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
-    8%   { opacity: 1; }
-    20%  { opacity: 1; transform: translate(calc(var(--dirX) * 0.3), calc(var(--dirY) * 60px)) rotate(2deg); }
-    50%  { opacity: 1; transform: translate(calc(var(--dirX) * 0.6), calc(var(--dirY) * 120px)) rotate(-1deg); }
-    80%  { opacity: 1; transform: translate(calc(var(--dirX) * 0.9), calc(var(--dirY) * 180px)) rotate(1deg); }
-    92%  { opacity: 1; }
-    100% { opacity: 0; transform: translate(var(--dirX), calc(var(--dirY) * 240px)) rotate(0deg); }
-}
-</style>
+<div id="floating-words">
 </div>
 
 <!-- NAVBAR -->
@@ -192,8 +115,10 @@
 
 <script>
 (function() {
-    var words = ["מוסד", "מרגלים", "ריגול", "צה״ל", "מתח", "פטריוטים", "מבצעים", "פוליטיקה", "שחיתות", "ישראל", "אהבה", "הרפתקאה", "שב״כ", "תחכום", "תחבולה", "עניין", "ריגוש", "שמחה", "פיתויים", "אכזבות"];
+    var words = ["הפתעות", "מרגלים", "דרמה", "צה״ל", "מתח", "פטריוטים", "מבצעים", "פוליטיקה", "שחיתות", "מוסד", "אהבה", "הרפתקאה", "שב״כ", "תחכום", "תחבולה", "עניין", "ריגוש", "שמחה", "פיתויים", "מבצעים", "סודות", "מודיעין", "חשאי", "פטריוטיות", "גיבורים"];
     var container = document.getElementById('floating-words');
+    var wordElements = [];
+    
     function spawn() {
         if (!container) return;
         var el = document.createElement('div');
@@ -201,16 +126,46 @@
         el.textContent = words[Math.floor(Math.random() * words.length)];
         el.style.left = (10 + Math.random() * 75) + 'vw';
         el.style.top = (10 + Math.random() * 70) + 'vh';
-        el.style.fontSize = (20 + Math.floor(Math.random() * 25)) + 'px';
-        var dirX = (Math.random() > 0.5 ? 1 : -1) * (20 + Math.random() * 40);
-        var dirY = (Math.random() > 0.5 ? -1 : 1);
+        el.style.fontSize = (22 + Math.floor(Math.random() * 28)) + 'px';
+        
+        // More varied directional movement
+        var dirX = (Math.random() - 0.5) * 2 * (70 + Math.random() * 100); // Range: -170px to +170px
+        var dirY = (Math.random() > 0.5 ? -1 : 1) * (0.8 + Math.random() * 0.5); // Range: -1.3 to +1.3
+        var rotDir = Math.random() > 0.5 ? 1 : -1;
+        
         el.style.setProperty('--dirX', dirX + 'px');
         el.style.setProperty('--dirY', dirY);
-        el.style.animation = 'floatDrift 8s linear infinite';
-        el.style.animationDelay = (Math.random() * 5) + 's';
+        el.style.setProperty('--rotDir', rotDir);
+        
+        // Duration between 9-12 seconds for variety
+        var duration = 9 + Math.random() * 3;
+        el.style.animation = 'floatDrift ' + duration + 's linear infinite';
+        
         container.appendChild(el);
+        wordElements.push(el);
+        
+        // Clean up old elements after animation completes
+        setTimeout(function() {
+            if (wordElements.length > 15) {
+                var oldEl = wordElements.shift();
+                if (oldEl && oldEl.parentNode) {
+                    oldEl.parentNode.removeChild(oldEl);
+                }
+            }
+        }, duration * 1000);
     }
-    for (var i = 0; i < 6; i++) spawn();
+    
+    // Spawn initial words with staggered delays
+    for (var i = 0; i < 12; i++) {
+        (function(index) {
+            setTimeout(function() {
+                spawn();
+            }, index * 2000); // 2 second intervals
+        })(i);
+    }
+    
+    // Continue spawning new words every 2 seconds
+    setInterval(spawn, 2000);
 })();
 </script>
 </body>
