@@ -10,7 +10,7 @@ body {
     inset: 0;
     overflow: hidden;
     pointer-events: none;
-    z-index: 0;
+    z-index: 9999; /* ← THIS */
 }
 
 /* Floating word */
