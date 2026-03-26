@@ -5,12 +5,12 @@ document.write(`
 <footer class="site-footer">
     <div class="footer-content">
         <div class="footer-links">
-            <a href="sifrutzola.html">ספרות זולה</a>
+            <a href="sifrutzola.html">אודות ספרות זולה</a>
             <span class="footer-sep">|</span>
             <a href="policy.html">תקנון האתר</a>
         </div>
         <div class="footer-text">
-            © ספרות זולה | כל הזכויות שמורות
+           <p>© ספרות זולה</p>
         </div>
     </div>
 </footer>

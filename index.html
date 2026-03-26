@@ -29,8 +29,7 @@
     <div class="nav-left">
         <span class="secure-badge">
             🔒
-            <img src="images/visa.png" alt="Visa" class="payment-icon">
-            <img src="images/mastercard.png" alt="Mastercard" class="payment-icon">
+            <img src="images/credit_card.png" alt="Visa" class="payment-icon">
         </span>
         
         <div class="cart-area" onclick="toggleCart()" id="cart-area">
@@ -123,7 +122,9 @@
 <!-- FOOTER -->
 
 <footer class="footer">
-    <p>© ספרות זולה</p>
+    <script src="js/footer.js"></script>
+    <script src="js/cart_script.js"></script>
+
 </footer>
 
 <!-- CART DRAWER -->
@@ -156,82 +157,6 @@
         </div>
     </div>
 </div>
-
-<script>
-// Simple cart functionality
-var cart = [];
-
-function addToCart(name, price) {
-    cart.push({name: name, price: price});
-    updateCart();
-    showCheckoutPopup();
-}
-
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCart();
-}
-
-function updateCart() {
-    var cartItems = document.getElementById('cart-items');
-    var cartTotal = document.getElementById('cart-total');
-    var checkoutBtn = document.getElementById('checkout-btn');
-    var cartCount = document.getElementById('cart-count');
-    var cartArea = document.getElementById('cart-area');
-    
-    // Update cart count badge
-    cartCount.textContent = cart.length;
-    
-    // Add/remove has-items class for styling
-    if (cart.length > 0) {
-        cartArea.classList.add('has-items');
-    } else {
-        cartArea.classList.remove('has-items');
-    }
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="cart-empty">הסל ריק</p>';
-        cartTotal.textContent = '₪0';
-        checkoutBtn.disabled = true;
-    } else {
-        var html = '';
-        var total = 0;
-        cart.forEach(function(item, index) {
-            total += item.price;
-            html += '<div class="cart-item">' +
-                    '<div class="cart-item-info">' +
-                    '<div class="cart-item-name">' + item.name + '</div>' +
-                    '<div class="cart-item-price">₪' + item.price + '</div>' +
-                    '</div>' +
-                    '<button class="cart-remove-btn" onclick="removeFromCart(' + index + ')">×</button>' +
-                    '</div>';
-        });
-        cartItems.innerHTML = html;
-        cartTotal.textContent = '₪' + total;
-        checkoutBtn.disabled = false;
-    }
-}
-
-function toggleCart() {
-    var drawer = document.getElementById('cart-drawer');
-    var overlay = document.getElementById('overlay');
-    drawer.classList.toggle('open');
-    overlay.style.display = drawer.classList.contains('open') ? 'block' : 'none';
-}
-
-function showCheckoutPopup() {
-    document.getElementById('checkout-popup').style.display = 'flex';
-}
-
-function hideCheckoutPopup() {
-    document.getElementById('checkout-popup').style.display = 'none';
-}
-
-function goToCheckout() {
-    hideCheckoutPopup();
-    toggleCart();
-}
-</script>
 
 <script>
 (function() {
