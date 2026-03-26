@@ -27,8 +27,17 @@
     </div>
 
     <div class="nav-left">
-        <!-- payment icons placeholder -->
-        <span style="color:white; font-size:14px;">🔒 Visa • Mastercard</span>
+        <span class="secure-badge">
+            🔒
+            <img src="images/visa.png" alt="Visa" class="payment-icon">
+            <img src="images/mastercard.png" alt="Mastercard" class="payment-icon">
+        </span>
+        
+        <div class="cart-area" onclick="toggleCart()" id="cart-area">
+            <img src="images/cart.png" alt="סל קניות" class="cart-icon">
+            <span class="cart-label">סל</span>
+            <span class="cart-badge" id="cart-count">0</span>
+        </div>
     </div>
 
 </nav>
@@ -49,6 +58,10 @@
 
         <div class="book-side">
             <img class="book-img" src="images/bookcover-ready.png" alt="כריכת הספר התבייתות">
+            <button class="add-cart-btn" onclick="addToCart('התבייתות', 79)">
+                <img src="images/cart.png" alt="סל" class="btn-cart-icon">
+                הוסף לסל
+            </button>
         </div>
 
     </div>
@@ -112,6 +125,113 @@
 <footer class="footer">
     <p>© ספרות זולה</p>
 </footer>
+
+<!-- CART DRAWER -->
+<div id="cart-drawer" class="cart-drawer">
+    <div class="cart-header">
+        <h3>סל הקניות שלי</h3>
+        <button onclick="toggleCart()" class="close-btn">×</button>
+    </div>
+    <div id="cart-items" class="cart-items-list"></div>
+    <div class="cart-footer">
+        <div class="cart-subtotal-row">ספרים: <span id="cart-total">₪0</span></div>
+        <div id="cart-delivery" class="cart-delivery-row"></div>
+        <div id="cart-grand-total" class="total-row" style="display:none;"></div>
+        <button id="checkout-btn" class="checkout-btn" disabled>לתשלום מאובטח</button>
+    </div>
+</div>
+<div id="overlay" onclick="toggleCart()"></div>
+
+<!-- CHECKOUT POPUP -->
+<div id="checkout-popup" class="checkout-popup">
+    <div class="checkout-popup-inner">
+        <button class="close-popup-btn" onclick="hideCheckoutPopup()">×</button>
+        <div class="checkout-popup-icon">✅</div>
+        <h2>הספר נוסף לסל!</h2>
+        <p>הוספת את "התבייתות" לסל הקניות שלך.<br>לתשלום מאובטח — הזמינו עכשיו.</p>
+        <div class="checkout-popup-total">₪79</div>
+        <div class="checkout-popup-btns">
+            <button class="checkout-btn" onclick="goToCheckout()">לתשלום</button>
+            <button class="continue-btn" onclick="hideCheckoutPopup()">המשך קניות</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Simple cart functionality
+var cart = [];
+
+function addToCart(name, price) {
+    cart.push({name: name, price: price});
+    updateCart();
+    showCheckoutPopup();
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+function updateCart() {
+    var cartItems = document.getElementById('cart-items');
+    var cartTotal = document.getElementById('cart-total');
+    var checkoutBtn = document.getElementById('checkout-btn');
+    var cartCount = document.getElementById('cart-count');
+    var cartArea = document.getElementById('cart-area');
+    
+    // Update cart count badge
+    cartCount.textContent = cart.length;
+    
+    // Add/remove has-items class for styling
+    if (cart.length > 0) {
+        cartArea.classList.add('has-items');
+    } else {
+        cartArea.classList.remove('has-items');
+    }
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="cart-empty">הסל ריק</p>';
+        cartTotal.textContent = '₪0';
+        checkoutBtn.disabled = true;
+    } else {
+        var html = '';
+        var total = 0;
+        cart.forEach(function(item, index) {
+            total += item.price;
+            html += '<div class="cart-item">' +
+                    '<div class="cart-item-info">' +
+                    '<div class="cart-item-name">' + item.name + '</div>' +
+                    '<div class="cart-item-price">₪' + item.price + '</div>' +
+                    '</div>' +
+                    '<button class="cart-remove-btn" onclick="removeFromCart(' + index + ')">×</button>' +
+                    '</div>';
+        });
+        cartItems.innerHTML = html;
+        cartTotal.textContent = '₪' + total;
+        checkoutBtn.disabled = false;
+    }
+}
+
+function toggleCart() {
+    var drawer = document.getElementById('cart-drawer');
+    var overlay = document.getElementById('overlay');
+    drawer.classList.toggle('open');
+    overlay.style.display = drawer.classList.contains('open') ? 'block' : 'none';
+}
+
+function showCheckoutPopup() {
+    document.getElementById('checkout-popup').style.display = 'flex';
+}
+
+function hideCheckoutPopup() {
+    document.getElementById('checkout-popup').style.display = 'none';
+}
+
+function goToCheckout() {
+    hideCheckoutPopup();
+    toggleCart();
+}
+</script>
 
 <script>
 (function() {
