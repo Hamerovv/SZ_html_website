@@ -1,0 +1,237 @@
+/* ════════════════════════════════════════════
+   CLASSIFIED DOCUMENT LAYER
+   Palette: gold #d1a64a / dark #2a2018 / mid #555
+   Scoped to .page-content inside .book-page-right
+════════════════════════════════════════════ */
+
+/* Watermark */
+.book-page-right .page-content {
+    position: relative;
+    overflow: hidden;
+}
+
+.book-page-right .page-content::before {
+    content: 'CLASSIFIED';
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-32deg);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: rgba(209,166,74,0.07);
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 0.25em;
+    z-index: 0;
+}
+
+.book-page-right .page-content > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── CLASSIFICATION BANNER (stamp style) ── */
+.cls-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid rgba(209,166,74,0.25);
+}
+
+.cls-stamp {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: #d1a64a;
+    border: 1.5px solid #d1a64a;
+    padding: 0.25rem 0.65rem;
+    opacity: 0.85;
+    transform: rotate(-1.5deg);
+    display: inline-block;
+    line-height: 1.4;
+}
+
+.cls-file-number {
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: #888070;
+}
+
+/* ── REDACTED BLOCKS ── */
+.redacted {
+    display: inline-block;
+    background: #2a2018;
+    color: transparent;
+    user-select: none;
+    height: 0.8em;
+    border-radius: 1px;
+    vertical-align: middle;
+}
+
+/* ── FILE HEADER ── */
+.cls-file-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 1rem;
+    margin: 0.9rem 0 0.7rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid rgba(209,166,74,0.2);
+}
+
+.cls-file-num {
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    color: #888;
+    margin-bottom: 0.15rem;
+}
+
+.cls-file-subject {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #2a2018;
+    line-height: 1.3;
+}
+
+.cls-status-badge {
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.48rem;
+    letter-spacing: 0.2em;
+    color: #d1a64a;
+    border: 1.5px solid #d1a64a;
+    padding: 3px 8px;
+    white-space: nowrap;
+    transform: rotate(1deg);
+    display: inline-block;
+    margin-top: 2px;
+}
+
+/* ── META ROW ── */
+.cls-meta-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid rgba(209,166,74,0.18);
+    margin-bottom: 0.9rem;
+}
+
+.cls-meta-cell {
+    padding: 6px 10px;
+    border-left: 1px solid rgba(209,166,74,0.12);
+}
+
+.cls-meta-cell:last-child {
+    border-left: none;
+}
+
+.cls-meta-cell-lbl {
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.44rem;
+    letter-spacing: 0.28em;
+    color: #d1a64a;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.cls-meta-cell-val {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #2a2018;
+    line-height: 1.2;
+}
+
+/* ── UNITS STRIP ── */
+.cls-units {
+    display: flex;
+    background: #2a2018;
+    margin-bottom: 1rem;
+}
+
+.cls-unit {
+    flex: 1;
+    padding: 6px 10px;
+    border-left: 1px solid rgba(209,166,74,0.12);
+}
+
+.cls-unit:last-child {
+    border-left: none;
+}
+
+.cls-unit-lbl {
+    display: block;
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    color: rgba(209,166,74,0.45);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.cls-unit-val {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #f0e5cc;
+    line-height: 1.3;
+}
+
+/* ── SECTION LABELS ── */
+.cls-section-lbl {
+    display: block;
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.44rem;
+    letter-spacing: 0.35em;
+    color: #aaa090;
+    text-transform: uppercase;
+    margin: 0.9rem 0 0.15rem;
+    padding-bottom: 3px;
+    border-bottom: 1px dashed rgba(209,166,74,0.18);
+}
+
+/* ── LANGUAGES ── */
+.cls-lang-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 4px 0 0.9rem;
+}
+
+.cls-lang-tag {
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border: 1px solid rgba(215,184,74,0.4);
+    color: #888070;
+    line-height: 1.6;
+}
+
+/* ── BOTTOM BAR ── */
+.cls-bottom-bar {
+    background: #2a2018;
+    margin: 1rem -1px -1px -1px;
+    padding: 4px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cls-bottom-bar span {
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    color: rgba(209,166,74,0.5);
+}
+
+/* ── BLOCKQUOTE OVERRIDE ── */
+.about-quote {
+    border-right: 4px solid #d7b84a !important;
+}
