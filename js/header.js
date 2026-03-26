@@ -21,7 +21,8 @@ document.write(`
             <span class="cart-label">סל</span>
             <span class="cart-badge" id="cart-count">0</span>
             <span class="secure-badge">
-                <img src="images/credit_card.png" alt="תשלום מאובטח" class="payment-icon">
+                <img src="images/visa.png" alt="Visa" class="payment-icon">
+                <img src="images/mastercard.png" alt="Mastercard" class="payment-icon">
             </span>
         </div>
 
