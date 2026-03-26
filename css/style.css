@@ -72,7 +72,7 @@ body {
     border-color: rgba(255,255,255,0.3);
 }
 
-/* Cart has items — more visible */
+/* Cart has items â€” more visible */
 .cart-area.has-items {
     background: #d7b84a;
     border-color: #c9a83a;
@@ -358,13 +358,13 @@ body {
 .cart-drawer {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   width: 380px;
   height: 100vh;
   background: white;
   box-shadow: -5px 0 30px rgba(0,0,0,0.2);
   z-index: 1001;
-  transform: translateX(-100%);
+  transform: translateX(100%);
   transition: 0.3s;
   display: flex;
   flex-direction: column;
