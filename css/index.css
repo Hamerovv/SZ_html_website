@@ -106,9 +106,10 @@
 /* ================= MOBILE RESPONSIVE ================= */
 
 @media (max-width: 900px) {
-    /* Floating words - reduce on mobile for performance */
+    /* Keep floating words but optimize for mobile */
     #floating-words {
-        display: none; /* Optional: can hide on mobile for better performance */
+        /* Reduce opacity slightly on mobile for less distraction */
+        opacity: 0.7;
     }
 
     /* Summary section */
@@ -148,6 +149,11 @@
 }
 
 @media (max-width: 600px) {
+    /* Further optimize floating words for small screens */
+    #floating-words {
+        opacity: 0.5; /* More subtle on small screens */
+    }
+    
     .summary {
         padding: 50px 15px;
     }
