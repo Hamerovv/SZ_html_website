@@ -27,8 +27,27 @@ function addToCart(name, price) {
 
 function addToCartPopup(name, price) {
     addToCart(name, price);
+
     const popup = document.getElementById('checkout-popup');
+    const totalEl = document.getElementById('popup-total');
+
     if (popup) popup.style.display = 'flex';
+
+    const { grandTotal } = getTotals();
+    if (totalEl) totalEl.innerText = "₪" + grandTotal;
+}
+
+function goToCheckout() {
+    const popup = document.getElementById('checkout-popup');
+    if (popup) popup.style.display = 'none';
+
+    const drawer = document.getElementById('cart-drawer');
+    const overlay = document.getElementById('overlay');
+
+    if (drawer) drawer.classList.add('open');
+    if (overlay) overlay.style.display = 'block';
+
+    updateUI(); // ensure totals are fresh
 }
 
 function hideCheckoutPopup() {
@@ -86,6 +105,8 @@ function customerFieldsHTML() {
 
 // הפונקציה שתיקנו עכשיו - עם ה-URL התקין
 function validateAndPay() {
+    const errorEl = document.getElementById('validation-msg');
+    if (errorEl) errorEl.style.display = 'none';
     saveCurrentInputs();
     const { grandTotal } = getTotals();
     const { name, email, phone, address } = tempCustomerData;

@@ -57,7 +57,7 @@
 
         <div class="book-side">
             <img class="book-img" src="images/bookcover-ready.png" alt="כריכת הספר התבייתות">
-            <button class="add-cart-btn" onclick="addToCart('התבייתות', 79)">
+            <button class="add-cart-btn" onclick="addToCartPopup('התבייתות', 87)">
                 <img src="images/cart.png" alt="סל" class="btn-cart-icon">
                 הוסף לסל
             </button>
@@ -150,7 +150,7 @@
         <div class="checkout-popup-icon">✅</div>
         <h2>הספר נוסף לסל!</h2>
         <p>הוספת את "התבייתות" לסל הקניות שלך.<br>לתשלום מאובטח — הזמינו עכשיו.</p>
-        <div class="checkout-popup-total">₪79</div>
+        <div class="checkout-popup-total" id="popup-total">₪0</div>
         <div class="checkout-popup-btns">
             <button class="checkout-btn" onclick="goToCheckout()">לתשלום</button>
             <button class="continue-btn" onclick="hideCheckoutPopup()">המשך קניות</button>
