@@ -43,3 +43,54 @@
     color: #2a2018;
     text-align: center;
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+    .policy-content {
+        max-width: 100%;
+    }
+
+    .policy-welcome {
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+
+    .policy-content h2 {
+        font-size: 18px;
+        margin: 24px 0 8px;
+    }
+
+    .policy-content p {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .policy-thanks {
+        font-size: 15px;
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .policy-welcome {
+        font-size: 15px;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .policy-content h2 {
+        font-size: 17px;
+        margin: 20px 0 7px;
+    }
+
+    .policy-content p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .policy-thanks {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+}

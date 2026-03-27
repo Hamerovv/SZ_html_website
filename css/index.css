@@ -102,3 +102,80 @@
     text-align: center;
     padding: 30px;
 }
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    /* Floating words - reduce on mobile for performance */
+    #floating-words {
+        display: none; /* Optional: can hide on mobile for better performance */
+    }
+
+    /* Summary section */
+    .summary {
+        padding: 60px 20px;
+    }
+
+    .summary h2 {
+        font-size: 32px;
+    }
+
+    .summary p {
+        font-size: 17px;
+    }
+
+    /* Section two - stack vertically */
+    .section-two {
+        flex-direction: column;
+    }
+
+    .section-two img,
+    .section-two .text {
+        width: 100%;
+    }
+
+    .section-two .text {
+        padding: 40px 30px;
+    }
+
+    .section-two h2 {
+        font-size: 32px;
+    }
+
+    .section-two .text p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .summary {
+        padding: 50px 15px;
+    }
+
+    .summary h2 {
+        font-size: 26px;
+    }
+
+    .summary p {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .gold-line {
+        width: 80px;
+        height: 3px;
+        margin: 20px auto;
+    }
+
+    .section-two h2 {
+        font-size: 26px;
+    }
+
+    .section-two .text {
+        padding: 30px 20px;
+    }
+
+    .section-two .text p {
+        font-size: 15px;
+    }
+}

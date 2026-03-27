@@ -152,7 +152,6 @@ body {
 }
 
 /* ============= LEGACY navbar class (backward compat) */
-/* ===== navbar alias for .site-header (backward compat) ===== */
 .navbar {
   background: #3f6f77;
   display: flex;
@@ -291,6 +290,12 @@ body {
   font-size: 16px;
   margin-bottom: 30px;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.cta-btn:hover {
+  background: #2d535c;
+  transform: translateY(-2px);
 }
 
 .price-area {
@@ -447,25 +452,7 @@ body {
   z-index: 1000;
 }
 
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 1000px) {
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .book-img {
-    width: 220px;
-  }
-
-  .hero {
-    height: auto;
-    padding: 60px 0;
-  }
-}
-
-
+/* ================= CHECKOUT POPUP ================= */
 
 .checkout-popup {
     display: none;
@@ -475,6 +462,7 @@ body {
     z-index: 9999;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .checkout-popup-inner {
@@ -727,49 +715,7 @@ body {
     margin-top: 5px;
 }
 
-/* ===== SITE HEADER (matches index navbar) ===== */
-
-.site-header {
-    background: #3f6f77;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 60px;
-    color: white;
-}
-
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.site-header .logo img {
-    height: 50px;
-    width: auto;
-    display: block;
-}
-
-.main-menu {
-    display: flex;
-    gap: 30px;
-}
-
-.main-menu a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.main-menu a:hover {
-    color: #d7b84a;
-}
-
-/* ===== SITE FOOTER (matches index footer) ===== */
+/* ===== SITE FOOTER ===== */
 
 .site-footer {
     background: #4f7680;
@@ -790,6 +736,8 @@ body {
     display: flex;
     gap: 15px;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .footer-links a {
@@ -812,22 +760,235 @@ body {
     color: rgba(255,255,255,0.6);
 }
 
-/* Chapter responsive */
+/* ================= SUMMARY SECTION ================= */
+.summary {
+    background: #4f7680;
+    color: white;
+    padding: 90px 20px;
+    text-align: center;
+}
 
-@media (max-width: 768px) {
+.summary h2 {
+    font-size: 48px;
+    font-weight: 300;
+}
+
+.gold-line {
+    width: 120px;
+    height: 4px;
+    background: #d1a64a;
+    margin: 25px auto;
+}
+
+.summary p {
+    max-width: 900px;
+    margin: 20px auto;
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+/* ================= SECOND SECTION ================= */
+.section-two {
+    display: flex;
+    align-items: center;
+}
+
+.section-two img {
+    width: 50%;
+    display: block;
+}
+
+.section-two .text {
+    width: 50%;
+    padding: 80px;
+}
+
+.section-two h2 {
+    font-size: 40px;
+    color: #3f5f67;
+    margin-bottom: 20px;
+}
+
+.section-two .text p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+    background: #4f7680;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .text-side {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .book-img {
+    width: 320px;
+  }
+
+  .hero {
+    height: auto;
+    padding: 60px 20px;
+  }
+
+  .headline {
+    font-size: 32px;
+  }
+
+  .subheadline {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Navbar */
+  .navbar,
   .site-header {
-      padding: 14px 20px;
-      flex-direction: column;
-      gap: 10px;
+    padding: 15px 20px;
+    flex-wrap: wrap;
+    gap: 15px;
   }
 
+  .navbar .nav-center,
   .main-menu {
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
   }
 
+  .navbar .nav-center a,
   .main-menu a {
-      font-size: 14px;
+    font-size: 14px;
+  }
+
+  .navbar .logo img,
+  .site-header .logo img {
+    height: 40px;
+  }
+
+  /* Section two */
+  .section-two {
+    flex-direction: column;
+  }
+
+  .section-two img,
+  .section-two .text {
+    width: 100%;
+  }
+
+  .section-two .text {
+    padding: 40px 20px;
+  }
+
+  .section-two h2 {
+    font-size: 32px;
+  }
+
+  .section-two .text p {
+    font-size: 16px;
+  }
+
+  /* Summary */
+  .summary {
+    padding: 60px 20px;
+  }
+
+  .summary h2 {
+    font-size: 32px;
+  }
+
+  .summary p {
+    font-size: 17px;
+  }
+
+  /* Cart drawer */
+  .cart-drawer {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  /* Checkout popup */
+  .checkout-popup-inner {
+    padding: 30px 20px;
+  }
+
+  .checkout-popup h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .book-img {
+    width: 240px;
+  }
+
+  .headline {
+    font-size: 26px;
+  }
+
+  .subheadline {
+    font-size: 18px;
+  }
+
+  .cta-btn {
+    padding: 14px 40px;
+    font-size: 15px;
+  }
+
+  .add-cart-btn {
+    padding: 12px 30px;
+    font-size: 15px;
+  }
+
+  /* Hide secure badge and payment icons on very small screens */
+  .secure-badge {
+    display: none;
+  }
+
+  .cart-label {
+    font-size: 14px;
+  }
+
+  /* Checkout popup buttons stack */
+  .checkout-popup-btns {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .checkout-popup .checkout-btn,
+  .checkout-popup .continue-btn {
+    width: 100%;
+  }
+
+  .summary h2 {
+    font-size: 26px;
+  }
+
+  .summary p {
+    font-size: 16px;
+  }
+
+  .section-two h2 {
+    font-size: 26px;
+  }
+
+  .section-two .text {
+    padding: 30px 15px;
   }
 }

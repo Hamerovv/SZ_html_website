@@ -22,3 +22,33 @@
     color: #d1a64a;
     font-family: 'Frank Ruhl Libre', serif;
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+    .about-content {
+        max-width: 100%;
+    }
+
+    .about-content p {
+        font-size: 16px;
+        line-height: 1.9;
+    }
+
+    .about-content p:first-child::first-letter {
+        font-size: 42px;
+        margin-left: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-content p {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .about-content p:first-child::first-letter {
+        font-size: 38px;
+        margin-left: 7px;
+    }
+}

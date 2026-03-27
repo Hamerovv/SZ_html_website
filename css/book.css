@@ -137,18 +137,114 @@
 
 /* ===== RESPONSIVE ===== */
 
+@media (max-width: 1100px) {
+    .book-spread {
+        max-width: 95%;
+    }
+
+    .page-content {
+        padding: 45px 60px;
+    }
+}
+
+@media (max-width: 900px) {
+    .book-page-left {
+        width: 80px;
+    }
+
+    .book-spine {
+        width: 18px;
+    }
+
+    .page-content {
+        padding: 40px 40px;
+    }
+
+    .chapter-title {
+        font-size: 24px;
+    }
+
+    .book-top-band {
+        height: 40px;
+    }
+
+    .book-bottom-band {
+        height: 35px;
+    }
+
+    .book-spread {
+        min-height: 600px;
+    }
+}
+
 @media (max-width: 768px) {
     .book-page-left, .book-spine {
         display: none;
     }
+
     .book-page-right {
         width: 100%;
         border-radius: 0;
+        box-shadow: none;
     }
+
+    .book-page-right::after {
+        display: none;
+    }
+
     .book-spread {
         max-width: 100%;
+        min-height: auto;
     }
+
     .page-content {
         padding: 40px 25px;
+    }
+
+    .book-top-band {
+        height: 30px;
+        border-bottom: 2px solid #3a5f68;
+    }
+
+    .book-bottom-band {
+        height: 30px;
+        border-top: 2px solid #3a5f68;
+    }
+
+    .book-shadow {
+        display: none;
+    }
+
+    .chapter-title {
+        font-size: 22px;
+    }
+
+    .chapter-subtitle {
+        font-size: 12px;
+    }
+
+    .page-divider {
+        width: 50px;
+        height: 2px;
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-content {
+        padding: 30px 20px;
+    }
+
+    .chapter-title {
+        font-size: 20px;
+    }
+
+    .chapter-subtitle {
+        font-size: 11px;
+    }
+
+    .book-top-band,
+    .book-bottom-band {
+        height: 25px;
     }
 }
