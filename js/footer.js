@@ -1,4 +1,4 @@
-// Footer component - unified across all pages
+// 1. Footer component - unified across all pages
 document.write(`
 <footer class="site-footer">
     <div class="footer-content">
